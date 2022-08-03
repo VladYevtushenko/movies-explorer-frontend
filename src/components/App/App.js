@@ -1,13 +1,13 @@
 import React from 'react';
 import { Route, Switch } from "react-router-dom";
 import './App.css';
+import { Main } from '../Main/Main';
 
-function App() {
+export const App = () => {
     return (
         <div className='page'>
-            {/* <Header /> */}
             <Switch>
-                <Route exact path='/' />
+                <Route exact path='/' element={<Main />} />
                 <Route path='/movies' />
                 <Route path='/saved-movies' />
                 <Route path='/profile' />
@@ -16,6 +16,4 @@ function App() {
             </Switch>
         </div>
     );
-}
-
-export default App;
+};
