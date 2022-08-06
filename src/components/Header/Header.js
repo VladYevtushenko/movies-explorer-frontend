@@ -6,7 +6,7 @@ import logo from '../../images/logo.svg';
 
 export const Header = () => {
     return (
-        <header className='header'>
+        <header className='header header_main'>
             <Link to='/'>
                 <img className='header__logo' src={logo} alt='logo' />
             </Link>
