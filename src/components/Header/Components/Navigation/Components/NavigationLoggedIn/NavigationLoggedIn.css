@@ -8,6 +8,7 @@
     font-weight: 400;
     text-align: center;
     text-decoration: none;
+    padding-right: 70px;
 }
 
 .navi-logged__movies {
@@ -71,4 +72,10 @@
 
 .navi-logged__account_icon {
     margin-top: 8px;
+}
+
+@media screen and (max-width: 770px) {
+    .navi-logged__menu-bar {
+        padding-right: 0;
+    }
 }

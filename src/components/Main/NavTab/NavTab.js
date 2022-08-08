@@ -5,17 +5,17 @@ export const NavTab = () => {
         <nav className='navi'>
             <ul className='navi__list'>
                 <li className='navi__item'>
-                    <a className='navi__link' href='#about-project'>
+                    <a className='navi__link' href='#about'>
                         О проекте
                     </a>
                 </li>
                 <li className='navi__item'>
-                    <a className='navi__link' href='#about-project'>
+                    <a className='navi__link' href='#techs'>
                         Технологии
                     </a>
                 </li>
                 <li className='navi__item'>
-                    <a className='navi__link' href='#about-project'>
+                    <a className='navi__link' href='#student'>
                         Студент
                     </a>
                 </li>
