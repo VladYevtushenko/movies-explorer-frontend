@@ -1,33 +1,112 @@
 .search-form {
-    width: 100%;
-    height: 222px;
+    width: 89%;
+    height: 152px;
     background: transparent;
+    margin: 0 auto;
+    position: relative;
+}
+
+.search-form::before {
+    border-bottom: 1px solid #424242;
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+    content: '';
 }
 
 .search-form__box {
-    
+    width: 100%;
+    height: 72px;
+    display: flex;
+    background: #222222;
+    box-shadow: 0px 3px 14px rgba(0, 0, 0, 0.08);
+    border-radius: 9px;
+    margin-top: 70px;
+    align-items: center;
 }
 
 .search-form__field {
-    
+    width: 80%;
+    border-right: 1px solid #505050;
+    height: 40px;
+    display: flex;
+    align-items: center;
+}
+
+.lupa {
+    margin-left: 19px;
+    margin-right: 10px;
 }
 
 .search-form__input {
-    
+    font-style: normal;
+    font-weight: 400;
+    font-size: 18px;
+    line-height: 20px;
+    color: #8B8B8B;
+    width: 82.2%;
+    border: none;
+    background: transparent;
 }
 
 .search-form__btn {
-    
+    background-image: url(../../images/find.svg);
+    width: 80px;
+    height: 34px;
+    background-color: transparent;
+    background-position: center;
+    background-size: contain;
+    background-repeat: no-repeat;
+    padding: 0;
+    border: none;
+    margin-right: 19px;
+    cursor: pointer;
+    transition: .2s;
+}
+
+.search-form__btn:hover {
+    opacity: .8;
+    transition: .2s;
 }
 
 .tumbler__label {
-    
+    display: flex;
+    font-style: normal;
+    font-weight: 400;
+    font-size: 13px;
+    line-height: 18px;
+    margin-right: 20px;
 }
 
 .checkbox {
-    
+    margin-left: 29px;
+    margin-right: 14px;
+    z-index: -1;
+    position: absolute;
+    cursor: pointer;
+    opacity: 0;
 }
 
 .checkbox__icon {
-    
+    width: 36px;
+    height: 20px;
+    background-image: url(../../images/smalltumb_active.svg);
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: cover;
+    /* background-color: transparent; */
+    cursor: pointer;
+    margin-left: 29px;
+    margin-right: 14px;
+    transition: .2s;
+}
+
+.checkbox__icon:hover {
+    opacity: .8;
+    transition: .2s;
+}
+
+.checkbox:checked + .checkbox__icon {
+    background-image: url(../../images/tumbtumbler-dis.svg);
+    background-blend-mode: unset;
 }
