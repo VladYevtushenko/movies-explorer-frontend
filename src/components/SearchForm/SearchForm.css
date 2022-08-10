@@ -93,7 +93,7 @@
     background-image: url(../../images/smalltumb_active.svg);
     background-repeat: no-repeat;
     background-position: center;
-    background-size: cover;
+    background-size: contain;
     /* background-color: transparent; */
     cursor: pointer;
     margin-left: 29px;
@@ -108,5 +108,4 @@
 
 .checkbox:checked + .checkbox__icon {
     background-image: url(../../images/tumbtumbler-dis.svg);
-    background-blend-mode: unset;
 }
