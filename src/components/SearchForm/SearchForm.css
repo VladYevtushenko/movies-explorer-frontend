@@ -72,6 +72,7 @@
 .tumbler__label {
     display: flex;
     font-style: normal;
+    align-items: center;
     font-weight: 400;
     font-size: 13px;
     line-height: 18px;
@@ -88,24 +89,59 @@
 }
 
 .checkbox__icon {
-    width: 36px;
-    height: 20px;
+    display: inline-block;
+    width: 34px;
+    height: 14px;
     background-image: url(../../images/smalltumb_active.svg);
     background-repeat: no-repeat;
     background-position: center;
-    background-size: contain;
-    /* background-color: transparent; */
+    background-size: cover;
+    background-color: unset;
     cursor: pointer;
     margin-left: 29px;
     margin-right: 14px;
-    transition: .2s;
+    /* transition: .2s; */
 }
 
-.checkbox__icon:hover {
+/* .checkbox__icon:hover {
     opacity: .8;
     transition: .2s;
-}
+} */
 
 .checkbox:checked + .checkbox__icon {
     background-image: url(../../images/tumbtumbler-dis.svg);
+    border-radius: 100px;
+    height: 13px;
+    width: 34px;
+    background-size: cover;
+}
+
+@media screen and (max-width: 640px) {
+    .search-form {
+        width: 93.75%;
+    }
+
+    .search-form__input {
+        font-size: 14px;
+        line-height: 20px;
+    }
+
+    .search-form__box {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .search-form__field {
+        border: none;
+        width: 100%;
+        margin-top: 19px;
+    }
+
+    .tumbler__label {
+        width: 100%;
+        align-items: center;
+        justify-content: center;
+        margin-top: 46px;
+        font-size: 11px;
+    }
 }
