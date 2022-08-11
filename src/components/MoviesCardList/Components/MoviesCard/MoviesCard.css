@@ -1,0 +1,35 @@
+.movie {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    border-radius: 6px;
+}
+
+.trailer__link {
+    
+}
+
+.movie__poster {
+    
+}
+
+.movie__add-btn {
+    
+}
+
+.movie__add-btn_type_active {
+    
+}
+
+.movie__info {
+    
+}
+
+.movie__name {
+    
+}
+
+.movie__duration {
+    
+}
