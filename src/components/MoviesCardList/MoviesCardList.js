@@ -19,10 +19,12 @@ export const MoviesCardList = () => {
                 <MoviesCard />
                 <MoviesCard />
             </ul>
-            <button 
-                type='button' 
-                className='movies-card-list__more-btn'
-            >Ещё</button>
+            <div className='movies-card-list__more-container'>
+                <button 
+                    type='button' 
+                    className='movies-card-list__more-btn'
+                >Ещё</button>
+            </div>
         </section>
     );
 };
