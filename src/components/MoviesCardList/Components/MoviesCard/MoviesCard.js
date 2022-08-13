@@ -1,8 +1,9 @@
+import React from 'react';
 import './MoviesCard.css';
 import testPic from '../../../../images/test_pic.png';
 
-export const MoviesCard = ({addButton, isAdded}) => {
-    const cardAddBtn = (`${isAdded && 'movie__add-btn_type_active'}`);
+export const MoviesCard = ({add, added}) => {
+    // const cardAddBtn = (`${isAdded && 'movie__add-btn_type_save'}`);
 
     return (
         <li className='movie'>
@@ -16,11 +17,15 @@ export const MoviesCard = ({addButton, isAdded}) => {
                     src={testPic}
                     alt='movie-poster'
                 />
-                <button 
-                    type='button'
-                    className={`movie__add-btn movie__add-btn_type_${addButton} ${cardAddBtn}`}
-                ></button>
             </a>
+            {!added 
+                ? (<button 
+                    type='button'
+                    className={`movie__add-btn movie__add-btn_type_save 
+                        ${add ? 'movie__add-btn_type_saved' : ''}`}
+                    ></button>)
+                    : (<button type='button' className='movie__add-btn movie__add-btn_type_delete'></button>)}
+                
             <div className='movie__info'>
                 <figcaption className='movie__name'>
                     33 слова о дизайне

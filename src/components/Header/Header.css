@@ -28,6 +28,12 @@
     transition: .2s;
 }
 
+@media screen and (max-width: 1170px) {
+    .header {
+        width: 89.2%;
+    }
+}
+
 @media screen and (max-width: 769px) {
     .header {
         padding: 0 30px;
