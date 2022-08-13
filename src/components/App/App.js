@@ -3,6 +3,7 @@ import { Route, Routes } from "react-router-dom";
 import './App.css';
 import { Main } from '../Main/Main';
 import { Movies } from '../Movies/Movies';
+import { SavedMovies } from '../SavedMovies/SavedMovies';
 
 export const App = () => {
     return (
@@ -10,7 +11,7 @@ export const App = () => {
             <Routes>
                 <Route exact path='/' element={<Main />} />
                 <Route path='/movies' element={<Movies />} />
-                <Route path='/saved-movies' />
+                <Route path='/saved-movies' element={<SavedMovies />}/>
                 <Route path='/profile' />
                 <Route path='/signin' />
                 <Route path='/signup'/>
