@@ -6,6 +6,7 @@ import { Movies } from '../Movies/Movies';
 import { SavedMovies } from '../SavedMovies/SavedMovies';
 import { Profile } from '../Profile/Profile';
 import { Login } from '../Login/Login';
+import { Register } from '../Register/Register';
 
 export const App = () => {
     return (
@@ -16,7 +17,7 @@ export const App = () => {
                 <Route path='/saved-movies' element={<SavedMovies />}/>
                 <Route path='/profile' element={<Profile />}/>
                 <Route path='/signin' element={<Login />}/>
-                <Route path='/signup'/>
+                <Route path='/signup' element={<Register />}/>
             </Routes>
         </div>
     );

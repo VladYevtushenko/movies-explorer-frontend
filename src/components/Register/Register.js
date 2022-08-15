@@ -1,5 +1,5 @@
 import React from 'react';
-import './Login.css';
+import './Register.css';
 import { AuthLogo } from '../AuthLogo/AuthLogo';
 import { AuthTitle } from '../AuthTitle/AuthTitle';
 import { AuthBox } from '../AuthBox/AuthBox';
@@ -8,17 +8,26 @@ import { AuthInput } from '../AuthInput/AuthInput';
 import { AuthBtn } from '../AuthBtn/AuthBtn';
 import { AuthCaption } from '../AuthCaption/AuthCaption';
 
-export const Login = () => {
+export const Register = () => {
     return (
-        <section className='login'>
+        <section className='register'>
             <AuthLogo />
-            <AuthTitle titleText="Рады видеть!" />
+            <AuthTitle titleText="Добро пожаловать!" />
             <AuthBox>
                 <AuthForm>
+                    <AuthInput 
+                        lableText='Имя' 
+                        type='text'
+                        name='name'
+                        required='required'
+                        minlength={2}
+                        maxlength={30}
+                    />
                     <AuthInput 
                         lableText='E-mail' 
                         type='email'
                         required='required'
+
                     />
                     <AuthInput 
                         lableText='Password' 
@@ -30,9 +39,9 @@ export const Login = () => {
             </AuthBox>
             <AuthBtn btnText='Войти' />
             <AuthCaption 
-                text='Ещё не зарегистрированы?'
-                linkText='Регистрация'
-                linkTo='/signin' 
+                text='Уже зарегистрированы?'
+                linkText='Войти'
+                linkTo='/signup' 
             />
         </section>
     );
