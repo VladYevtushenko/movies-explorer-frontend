@@ -1,0 +1,11 @@
+.auth-box {
+    width: 100%;
+    margin-bottom: 179px;
+    box-sizing: border-box;
+}
+
+@media screen and (max-width: 430px) {
+    .auth-box  {
+        margin-top: 56px;
+    }
+}

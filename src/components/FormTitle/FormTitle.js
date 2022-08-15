@@ -1,9 +1,9 @@
 import './FormTitle.css';
 
-export const FormTitle = () => {
+export const FormTitle = ({userName}) => {
     return (
         <>
-            <h2 className='form-title'>Привет, Влад</h2>
+            <h2 className='form-title'>Привет, {userName}</h2>
         </>
     );
 };

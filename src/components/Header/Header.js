@@ -4,7 +4,7 @@ import './Header.css';
 import { Navigation } from './Components/Navigation/Navigation';
 import logo from '../../images/logo.svg';
 
-export const Header = ({ loggedIn }) => {
+export const Header = () => {
     const page = useLocation();
 
     return (
@@ -16,7 +16,7 @@ export const Header = ({ loggedIn }) => {
             <Link to='/'>
                 <img className='header__logo' src={logo} alt='logo' />
             </Link>
-            <Navigation loggedIn={loggedIn}/>
+            <Navigation />
         </header>
     );
 };
