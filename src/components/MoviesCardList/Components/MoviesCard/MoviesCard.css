@@ -38,10 +38,15 @@
 
 .movie__add-btn_type_saved {
     background-image: url(../../../../images/saved.svg);
+    height: 21px;
+    width: 21px;
 }
 
 .movie__add-btn_type_delete {
     background-image: url(../../../../images/delete.svg);
+    height: 21px;
+    width: 21px;
+    border-radius: 10.5px;
 }
 
 .movie__info {
@@ -79,5 +84,17 @@
     .movie__name {
         font-size: 12px;
         line-height: 14.5px;
+    }
+
+    .movie__add-btn {
+        top: 26px;
+    }
+
+    .movie__add-btn_type_saved {
+        top: 26px;
+    }
+
+    .movie__add-btn_type_delete {
+        top: 26px;
     }
 }

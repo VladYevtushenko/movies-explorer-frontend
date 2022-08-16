@@ -1,9 +1,19 @@
-import React from 'react';
+import React, { useState } from 'react';
+import { useLocation } from 'react-router-dom';
 import './MoviesCard.css';
 import testPic from '../../../../images/test_pic.png';
 
-export const MoviesCard = ({add, added}) => {
-    // const cardAddBtn = (`${isAdded && 'movie__add-btn_type_save'}`);
+export const MoviesCard = () => {
+    const location = useLocation();
+    const [added, setAdded] = useState();
+
+    const handleAdd = () => {
+        setAdded(!added);
+    };
+
+    const handleRemove = () => {
+        setAdded(false);
+    };
 
     return (
         <li className='movie'>
@@ -18,13 +28,19 @@ export const MoviesCard = ({add, added}) => {
                     alt='movie-poster'
                 />
             </a>
-            {!added 
+            {location.pathname !== '/saved-movies' 
                 ? (<button 
                     type='button'
+                    onClick={handleAdd}
                     className={`movie__add-btn movie__add-btn_type_save 
-                        ${add ? 'movie__add-btn_type_saved' : ''}`}
-                    ></button>)
-                    : (<button type='button' className='movie__add-btn movie__add-btn_type_delete'></button>)}
+                        ${added ? 'movie__add-btn_type_saved' : ''}`}
+                    />)
+                    : (<button 
+                        type='button' 
+                        className='movie__add-btn movie__add-btn_type_delete' 
+                        aria-label='delete'
+                        onClick={handleRemove}
+                    />)}
                 
             <div className='movie__info'>
                 <figcaption className='movie__name'>

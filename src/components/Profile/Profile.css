@@ -21,6 +21,7 @@
     width: 100%;
     display: flex;
     justify-content: space-between;
+    flex-wrap: wrap;
     border-bottom: 1px solid #424242;
     font-style: normal;
     font-size: 11px;
@@ -37,6 +38,7 @@
 .profile__name {
     font-weight: 500;
     height: 14px;
+    width: 141px;
 }
 
 .profile__input {
@@ -46,6 +48,11 @@
     border: none;
     height: 14px;
     color: #FFFFFF;
+    width: 200px;
+}
+
+.profile__input:focus {
+    outline: none;
 }
 
 .profile__edit-btn {
@@ -82,6 +89,15 @@
 .profile__logout:hover {
     opacity: .8;
     transition: .2s;
+}
+
+.input__error {
+    font-style: normal;
+    font-weight: 400;
+    font-size: 10px;
+    line-height: 12px;
+    color: #EE3465;
+    align-self: flex-start;
 }
 
 @media screen and (max-width: 770px) {

@@ -23,10 +23,10 @@ export const AboutMe = () => {
                         </li>
                         <li className='about-me__link-item'>
                             <a 
-                                href='https://github.com/VladYevtushenko' 
+                                href='https://www.instagram.com/vlad_yevtushenko' 
                                 className='about-me__link' 
                                 target='blank'
-                            >GitHub</a>
+                            >Instagram</a>
                         </li>
                     </ul>
                 </div>

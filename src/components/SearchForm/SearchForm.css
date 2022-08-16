@@ -98,22 +98,18 @@
     background-size: cover;
     background-color: unset;
     cursor: pointer;
+    border-radius: 100px;
     margin-left: 29px;
     margin-right: 14px;
-    /* transition: .2s; */
 }
-
-/* .checkbox__icon:hover {
-    opacity: .8;
-    transition: .2s;
-} */
 
 .checkbox:checked + .checkbox__icon {
     background-image: url(../../images/tumbtumbler-dis.svg);
     border-radius: 100px;
-    height: 13px;
+    height: 14px;
     width: 34px;
     background-size: cover;
+    background-color: unset;
 }
 
 @media screen and (max-width: 640px) {

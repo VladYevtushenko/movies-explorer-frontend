@@ -20,8 +20,8 @@ export const Register = () => {
                         type='text'
                         name='name'
                         required='required'
-                        minlength={2}
-                        maxlength={30}
+                        minLength={2}
+                        maxLength={30}
                     />
                     <AuthInput 
                         lableText='E-mail' 
@@ -33,15 +33,15 @@ export const Register = () => {
                         lableText='Password' 
                         type='password'
                         required='required'
-                        minlength={8}
+                        minLength={8}
                     />
                 </AuthForm>
             </AuthBox>
-            <AuthBtn btnText='Войти' />
+            <AuthBtn btnText='Зарегистрироваться' />
             <AuthCaption 
                 text='Уже зарегистрированы?'
                 linkText='Войти'
-                linkTo='/signup' 
+                linkTo='/signin' 
             />
         </section>
     );

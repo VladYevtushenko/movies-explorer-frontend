@@ -24,7 +24,7 @@ export const Login = () => {
                         lableText='Password' 
                         type='password'
                         required='required'
-                        minlength={8}
+                        minLength={8}
                     />
                 </AuthForm>
             </AuthBox>
