@@ -16,7 +16,7 @@ export const SearchForm = () => {
                     />
                     <button 
                         className='search-form__btn'
-                        type='button'
+                        type='submit'
                     ></button>
                 </div>
                 <label className='tumbler__label'>
