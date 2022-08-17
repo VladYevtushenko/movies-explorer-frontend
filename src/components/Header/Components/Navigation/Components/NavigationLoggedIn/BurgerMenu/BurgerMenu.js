@@ -1,6 +1,6 @@
 import { NavLink } from "react-router-dom";
 import './BurgerMenu.css'
-import accIcon from '../../../../../../../images/account-icon.svg';
+import accIcon from '../../../../../../../images/accIcon_black.svg';
 
 export const BurgerMenu = ({ onCloseMenu }) => {
     return (
@@ -46,13 +46,11 @@ export const BurgerMenu = ({ onCloseMenu }) => {
                     >
                         Аккаунт 
                     </NavLink>
-                    <div className='menu__account_icon-box'>
-                        <img 
-                            src={accIcon} 
-                            alt='profile icon'
-                            className='menu__account-icon' 
-                        />
-                    </div>
+                    <img 
+                        src={accIcon} 
+                        alt='profile icon'
+                        className='menu__account-icon' 
+                    />
                 </div>
             </nav>
         </section>

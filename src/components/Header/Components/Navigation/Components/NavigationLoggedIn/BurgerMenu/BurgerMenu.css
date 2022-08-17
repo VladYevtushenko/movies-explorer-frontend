@@ -81,19 +81,12 @@
     height: 30px;
 }
 
-.menu__account_icon-box {
+.menu__account-icon {
     width: 26px;
     height: 30px;
-    object-fit: contain;
-    object-position: center;
-    background: #313131;
     border: 1px solid #000000;
     box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
     border-radius: 4px;
-}
-
-.menu__account-icon {
-    margin: 8px 7.25px;
 }
 
 @media screen and (max-width: 550px) {

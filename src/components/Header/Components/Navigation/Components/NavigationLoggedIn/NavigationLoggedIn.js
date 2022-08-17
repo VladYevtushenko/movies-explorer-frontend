@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { NavLink } from 'react-router-dom';
 import './NavigationLoggedIn.css';
-import accIcon from '../../../../../../images/account-icon.svg';
+import accIcon from '../../../../../../images/accIcon_black.svg';
 import { BurgerMenu } from './BurgerMenu/BurgerMenu';
 
 export const NavigationLoggedIn = () => {
@@ -47,13 +47,11 @@ export const NavigationLoggedIn = () => {
                     to='/profile' className='navi-logged__account_link'>
                     Аккаунт
                 </NavLink>
-                <div className='navi-logged__account_icon-box'>
-                    <img 
-                        src={accIcon} 
-                        alt='profile icon'
-                        className='navi-logged__account_icon' 
-                    />
-                </div>
+                <img 
+                    src={accIcon} 
+                    alt='profile icon'
+                    className='navi-logged__account_icon' 
+                />
             </div>
         </nav>
         </>

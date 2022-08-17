@@ -5,6 +5,7 @@
     line-height: 16px;
     font-size: 12px;
     font-weight: 500;
+    margin-right: 70px;
 }
 
 .auth-menu__link {
@@ -37,9 +38,16 @@
     transition: .2s;
 }
 
-@media screen and (max-width: 321px) {
+@media screen and (max-width: 770px) {
+    .auth-menu {
+        margin-right: 30px;
+    }
+}
+
+@media screen and (max-width: 350px) {
     .auth-menu {
         font-size: 10px;
+        margin-right: 14px;
     }
 
     .btn {

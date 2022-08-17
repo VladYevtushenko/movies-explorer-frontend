@@ -4,7 +4,8 @@ import { NavigationLoggedIn } from './Components/NavigationLoggedIn/NavigationLo
 
 export const Navigation = () => {
     // eslint-disable-next-line no-unused-vars
-    const [loggedIn, setLoggedIn] = useState(false);
+    const [loggedIn, setLoggedIn] = useState(true);
 
-    return <>{loggedIn ? <NavigationAuth /> : <NavigationLoggedIn />}</>;
+    return <>{loggedIn ? <NavigationLoggedIn /> : <NavigationAuth />}</>;
 };
+
