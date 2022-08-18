@@ -1,0 +1,39 @@
+.navi {
+    width: 100%;
+    height: 66px;
+    background-color: #272727;
+    display: flex;
+    justify-content: center;
+}
+
+.navi__list {
+    margin: 0;
+    padding: 0;
+    display: flex;
+    width: 320px;
+    justify-content: center;
+    align-self: center;
+    gap: 40px;
+}
+
+.navi__item {
+    list-style: none;
+}
+
+.navi__link {
+    text-decoration: underline;
+    color: #ffffff;
+    font-style: normal;
+    font-size: 13px;
+    line-height: 16px;
+    font-weight: 500;
+}
+
+@media screen and (max-width: 380px) {
+    .navi__list {
+        gap: 24px;
+    }
+    .navi__link {
+        font-size: 11px;
+    }
+}

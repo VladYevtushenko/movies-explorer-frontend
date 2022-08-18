@@ -1,0 +1,58 @@
+.auth-menu {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    line-height: 16px;
+    font-size: 12px;
+    font-weight: 500;
+    margin-right: 70px;
+}
+
+.auth-menu__link {
+    text-decoration: none;
+    color: white;
+    transition: .2s;
+}
+
+.auth-menu__link:hover {
+    opacity: .7;
+    transition: .2s;
+}
+
+.btn {
+    width: 76px;
+    height: 32px;
+    background-color: #3DDC84;
+    border-radius: 3px;
+    margin-left: 30px;
+    cursor: pointer;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    transition: .2s;
+    color: black;
+}
+
+.btn:hover {
+    opacity: .8;
+    transition: .2s;
+}
+
+@media screen and (max-width: 770px) {
+    .auth-menu {
+        margin-right: 30px;
+    }
+}
+
+@media screen and (max-width: 350px) {
+    .auth-menu {
+        font-size: 10px;
+        margin-right: 14px;
+    }
+
+    .btn {
+        width: 54px;
+        height: 26px;
+        margin-left: 14px;
+    }
+}
