@@ -56,6 +56,12 @@
     }
 }
 
+@media screen and (max-width: 793px) {
+    .movies-card-list__list {
+        width: 93%;
+    }
+}
+
 @media screen and (max-width: 360px) {
     .movies-card-list__list {
         grid-template-columns: repeat(auto-fill, 300px);
