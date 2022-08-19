@@ -1,10 +1,25 @@
 import React, { useState } from 'react';
+// import { useContext } from 'react';
+// import { CurrentMoviesSaveContext } from '../../../../contexts/CurrentMoviesSaveContext';
 import { useLocation } from 'react-router-dom';
 import './MoviesCard.css';
-import testPic from '../../../../images/test_pic.png';
 
-export const MoviesCard = () => {
+export const MoviesCard = ({ movie, type }) => {
     const location = useLocation();
+
+    // const CurrentMoviesSave = useContext(CurrentMoviesSaveContext);
+    const { nameRu, duration, image } = movie;
+    // const movieData = CurrentMoviesSave.filter((el) => el.movieID === movie.id);
+
+    const transformMins = (minutes) => {
+        const hours = Math.trunc(minutes / 60);
+        const mins = minutes % 60;
+        return hours > 0 ? `${hours}ч ${mins}м` : `${mins}м`;
+    };
+
+    const movieLength = transformMins(duration);
+    const moviePoster = type === 'all' ? `https://api.nomoreparties.co/${image.url}` : movie.image;
+
     const [added, setAdded] = useState();
 
     const handleAdd = () => {
@@ -19,13 +34,13 @@ export const MoviesCard = () => {
         <li className='movie'>
             <a 
                 className='trailer__link'
-                href='https://www.youtube.com/watch?v=iudeJyaOxss&ab_channel=%D0%9E%D0%BD%D0%BB%D0%B0%D0%B9%D0%BD-%D1%88%D0%BA%D0%BE%D0%BB%D0%B0%D0%B4%D0%B8%D0%B7%D0%B0%D0%B9%D0%BD%D0%B0BBE'
+                href={movie.trailerLink}
                 target='blank'
             >
                 <img 
                     className='movie__poster'
-                    src={testPic}
-                    alt='movie-poster'
+                    src={moviePoster}
+                    alt={nameRu}
                 />
             </a>
             {location.pathname !== '/saved-movies' 
@@ -44,9 +59,9 @@ export const MoviesCard = () => {
                 
             <div className='movie__info'>
                 <figcaption className='movie__name'>
-                    33 слова о дизайне
+                    {nameRu}
                 </figcaption>
-                <p className='movie__duration'>1ч 17м</p>
+                <p className='movie__duration'>{movieLength}</p>
             </div>
         </li>
     );
