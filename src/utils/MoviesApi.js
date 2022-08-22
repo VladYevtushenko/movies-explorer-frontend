@@ -1,13 +1,13 @@
 import { MOVIE_API_URL } from "../consts/consts";
 
 const getResponseData = (res) => {
-    if (res.ok) {
-        return res.json();
-    } else {
+    try {
+        if (!res.ok) {
+            throw new Error ('Ошибка запроса');
+        }
         return res.json()
-            .then(data => {
-                throw new Error(data.error || data.message);
-            });
+    } catch (err) {
+        return err;
     }
 };
 

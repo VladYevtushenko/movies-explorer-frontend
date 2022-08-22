@@ -1,15 +1,13 @@
-import React, { useState } from 'react';
-// import { useContext } from 'react';
-// import { CurrentMoviesSaveContext } from '../../../../contexts/CurrentMoviesSaveContext';
-import { useLocation } from 'react-router-dom';
+import { useContext } from 'react';
+import { CurrentMoviesSaveContext } from '../../../../contexts/CurrentMoviesSaveContext';
 import './MoviesCard.css';
 
-export const MoviesCard = ({ movie, type }) => {
-    const location = useLocation();
+export const MoviesCard = ({ movie, type, onClickMovieBtn }) => {
 
-    // const CurrentMoviesSave = useContext(CurrentMoviesSaveContext);
-    const { nameRu, duration, image } = movie;
-    // const movieData = CurrentMoviesSave.filter((el) => el.movieID === movie.id);
+    const CurrentMoviesSave = useContext(CurrentMoviesSaveContext);
+    const { nameRu, length, image } = movie;
+    const movieData = CurrentMoviesSave.filter((el) => el.movieID === movie.id);
+    const isSaved = movieData.lenght > 0;
 
     const transformMins = (minutes) => {
         const hours = Math.trunc(minutes / 60);
@@ -17,18 +15,8 @@ export const MoviesCard = ({ movie, type }) => {
         return hours > 0 ? `${hours}ч ${mins}м` : `${mins}м`;
     };
 
-    const movieLength = transformMins(duration);
+    const movieLength = transformMins(length);
     const moviePoster = type === 'all' ? `https://api.nomoreparties.co/${image.url}` : movie.image;
-
-    const [added, setAdded] = useState();
-
-    const handleAdd = () => {
-        setAdded(!added);
-    };
-
-    const handleRemove = () => {
-        setAdded(false);
-    };
 
     return (
         <li className='movie'>
@@ -43,19 +31,27 @@ export const MoviesCard = ({ movie, type }) => {
                     alt={nameRu}
                 />
             </a>
-            {location.pathname !== '/saved-movies' 
-                ? (<button 
-                    type='button'
-                    onClick={handleAdd}
-                    className={`movie__add-btn movie__add-btn_type_save 
-                        ${added ? 'movie__add-btn_type_saved' : ''}`}
-                    />)
-                    : (<button 
+            {type === 'all' ? (
+                isSaved ? (
+                    <button 
+                        type='button'
+                        className='movie__add-btn movie__add-btn_type_saved' 
+                        onClick={() => onClickMovieBtn(movie, 'delete', movieData[0]._id)}
+                    />
+                    ) : (
+                    <button 
+                        type='button' 
+                        className='movie__add-btn movie__add-btn_type_save' 
+                        onClick={() => onClickMovieBtn(movie, 'save', null)}
+                    />
+                    )
+                ) : (
+                    <button 
                         type='button' 
                         className='movie__add-btn movie__add-btn_type_delete' 
-                        aria-label='delete'
-                        onClick={handleRemove}
-                    />)}
+                        onClick={() => onClickMovieBtn(movie._id)}
+                    />
+                )}   
                 
             <div className='movie__info'>
                 <figcaption className='movie__name'>

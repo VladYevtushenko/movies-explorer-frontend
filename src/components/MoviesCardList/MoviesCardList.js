@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import './MoviesCardList.css';
 import { MoviesCard } from './Components/MoviesCard/MoviesCard';
+import { More } from './Components/More/More';
 import {
     VP_WIDTH_1280,
     VP_WIDTH_768,
@@ -12,7 +13,7 @@ import {
     ADD_2_TO_LIST,
 } from '../../consts/consts.js';
 
-export const MoviesCardList = ({ movieList, type }) => {
+export const MoviesCardList = ({ moviesList, type, onClickMovieBtn }) => {
     const [counter, setCounter] = useState();
     const [moreCard, setMoreCard] = useState();
 
@@ -20,32 +21,58 @@ export const MoviesCardList = ({ movieList, type }) => {
         if (viewWidth >= VP_WIDTH_1280) {
             setCounter(ITEMS_PER_WIDTH_1280);
             return setMoreCard(ADD_3_TO_LIST);
-        } else if (viewWidth > VP_WIDTH_762 ) {
-
-        }
+        } else if (viewWidth >= VP_WIDTH_762 && viewWidth <= VP_WIDTH_768) {
+            setCounter(ITEMS_PER_WIDTH_768);
+            return setMoreCard(ADD_2_TO_LIST);
+        } else setCounter(ITEMS_PER_WIDTH_762);
+        return setMoreCard(ADD_2_TO_LIST);
     };
+
+    useEffect(() => {
+        const VPWidth = window.innerWidth;
+        defineCardAmount(VPWidth);
+    }, []);
+
+    const useCounter = () => setCounter((...initial) => Number(initial) + moreCard);
+
+    useEffect(() => {
+        const setTimeOut = (e) => setTimeout(defineCardAmount(e), 2000);
+        window.addEventListener('resize', (e) => 
+            setTimeOut(e.currentTarget.innerWidth)
+        );
+        return window.removeEventListener('resize', (e) => 
+            setTimeOut(e.currentTarget.innerWidth)
+        );
+    }, []);
+
     return (
         <section className='movies-card-list'>
             <ul className='movies-card-list__list'>
-                <MoviesCard />
-                <MoviesCard />
-                <MoviesCard />
-                <MoviesCard />
-                <MoviesCard />
-                <MoviesCard />
-                <MoviesCard />
-                <MoviesCard />
-                <MoviesCard />
-                <MoviesCard />
-                <MoviesCard />
-                <MoviesCard />
+                {type === 'all'
+                    ? moviesList.slice(0, counter).map((movie) => {
+                        return (
+                            <MoviesCard 
+                                movie={movie}
+                                key={movie.id}
+                                type={type}
+                                onClickMovieBtn={onClickMovieBtn}
+                            />
+                        );
+                    })    
+                    : moviesList.map((movie) => {
+                        return (
+                            <MoviesCard 
+                                movie={movie}
+                                key={movie._id}
+                                type={type}
+                                onClickMovieBtn={onClickMovieBtn}
+                            />
+                        );
+                    })}     
             </ul>
-            <div className='movies-card-list__more-container'>
-                <button 
-                    type='button' 
-                    className='movies-card-list__more-btn'
-                >Ещё</button>
-            </div>
+            {type === 'all' && moviesList.length > counter && (
+                <More useCounter={useCounter} />
+            )}
         </section>
     );
 };

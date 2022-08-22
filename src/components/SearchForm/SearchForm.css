@@ -49,6 +49,18 @@
     background: transparent;
 }
 
+.search-form__input:focus:active {
+    outline: 0;
+    outline-offset: 0;
+    border: none;
+    background-color: #222222;
+    outline-offset: none;
+    font-weight: 400;
+    font-size: 18px;
+    line-height: 20px;
+    color: #8B8B8B;
+}
+
 .search-form__btn {
     background-image: url(../../images/find.svg);
     width: 80px;
