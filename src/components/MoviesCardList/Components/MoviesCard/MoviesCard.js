@@ -5,9 +5,10 @@ import './MoviesCard.css';
 export const MoviesCard = ({ movie, type, onClickMovieBtn }) => {
 
     const CurrentMoviesSave = useContext(CurrentMoviesSaveContext);
-    const { nameRu, length, image } = movie;
-    const movieData = CurrentMoviesSave.filter((el) => el.movieID === movie.id);
-    const isSaved = movieData.lenght > 0;
+    const { nameRU, duration, image } = movie;
+    const movieData = CurrentMoviesSave.filter((el) => el.movieId === movie.id);
+    const isSave = movieData.lenght > 0;
+
 
     const transformMins = (minutes) => {
         const hours = Math.trunc(minutes / 60);
@@ -15,8 +16,8 @@ export const MoviesCard = ({ movie, type, onClickMovieBtn }) => {
         return hours > 0 ? `${hours}ч ${mins}м` : `${mins}м`;
     };
 
-    const movieLength = transformMins(length);
-    const moviePoster = type === 'all' ? `https://api.nomoreparties.co/${image.url}` : movie.image;
+    const movieLength = transformMins(duration);
+    const moviePoster = type === 'all' ? `https://api.nomoreparties.co${image.url}` : movie.image;
 
     return (
         <li className='movie'>
@@ -28,11 +29,11 @@ export const MoviesCard = ({ movie, type, onClickMovieBtn }) => {
                 <img 
                     className='movie__poster'
                     src={moviePoster}
-                    alt={nameRu}
+                    alt={nameRU}
                 />
             </a>
             {type === 'all' ? (
-                isSaved ? (
+                isSave ? (
                     <button 
                         type='button'
                         className='movie__add-btn movie__add-btn_type_saved' 
@@ -55,7 +56,7 @@ export const MoviesCard = ({ movie, type, onClickMovieBtn }) => {
                 
             <div className='movie__info'>
                 <figcaption className='movie__name'>
-                    {nameRu}
+                    {nameRU}
                 </figcaption>
                 <p className='movie__duration'>{movieLength}</p>
             </div>

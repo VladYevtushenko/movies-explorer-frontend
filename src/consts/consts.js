@@ -1,6 +1,9 @@
 // api urls
 
-export const MAIN_API_URL = 'https://api.movieshelf.by.vladevt.nomoredomains.xyz';
+export const MAIN_API_URL = 'http://localhost:3001';
+
+// https://api.movieshelf.by.vladevt.nomoredomains.xyz
+
 export const MOVIE_API_URL = 'https://api.nomoreparties.co/beatfilm-movies';
 
 // errors status codes
@@ -19,7 +22,8 @@ export const EMAIL_PASSWORD_ERROR = 'Указаны неверные почта 
 export const USE_TEXT_MESSAGE = 'Введите ключевое слово';
 export const SERVER_ERROR_SEARCH = 'Во время запроса произошла ошибка. Возможно, проблема с соединением или сервер недоступен. Подождите немного и попробуйте ещё раз';
 export const CONFLICT_ERROR = 'Пользователь с таким Email уже зарегистрирован';
-export const SERVER_ERROR = 'Что-то пошло не так, попробуйте еще раз...';
+export const SERVER_ERROR = 'Что-то не так, попробуйте еще раз...';
+export const SAVE_ERROR_MESSAGE = 'Что-то не так, фильм не может быть сохранен'
 
 // success message
 

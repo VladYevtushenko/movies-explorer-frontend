@@ -5,27 +5,27 @@ import { USE_TEXT_MESSAGE } from '../../consts/consts';
 
 export const SearchForm = ({
     requestList,
-    onClickShortMovie,
+    onClickShortMovieBtn,
     openResultMessage,
     type,
 }) => {
-    const [value, setValue] = useState({text: '', shortTumbler: 'off'});
-    const [shortMovieTumbler, setShortMovieTumbler] = useState(false);
+    const [value, setValue] = useState({text: '', short: 'off'});
+    const [tumbler, setTumbler] = useState(false);
     const [messageError, setMessageError] = useState('');
     const [isValid, setIsValid] = useState(true);
 
     const handleChange = (evt) => {
         evt.preventDefault();
         const { value } = evt.target;
-        setValue((previous) => ({ ...previous, text: value }));
+        setValue((prev) => ({ ...prev, text: value }));
         setMessageError(evt.target.validationMessage);
     };
 
-    const handleShortTumbler = () => {
-        const newValue = value.shortTumbler === 'off' ? 'on' : 'off';
-        setValue((previous) => ({ ...previous, text: newValue }));
-        setShortMovieTumbler(!shortMovieTumbler);
-        return onClickShortMovie(newValue);
+    const handleShort = () => {
+        const valueNew = value.short === 'off' ? 'on' : 'off';
+        setValue((prev) => ({ ...prev, text: valueNew }));
+        setTumbler(!tumbler);
+        return onClickShortMovieBtn(valueNew);
     };
 
     const onClickMovieSearchBtn = () => {
@@ -35,17 +35,18 @@ export const SearchForm = ({
     };
 
     useEffect(() => {
-        if (type === 'completeMoviesList') {
-            const searchMovie = localStorage.getItem('searchMovie');
-            const shortMovieFilter = localStorage.getItem('shortMovieFilter');
-            if (!searchMovie && !shortMovieFilter) {
-                setValue({ text: '', shortTumbler: 'off' });
-                setShortMovieTumbler(false);
+        if (type === 'allMovies') {
+            const searchText = localStorage.getItem('searchText');
+            const shortFilter = localStorage.getItem('shortFilter');
+            if (!searchText && !shortFilter) {
+                setValue({ text: '', short: 'off' });
+                setTumbler(false);
                 return;
-            } else setValue({ text: searchMovie, shortTumbler: shortMovieFilter });
-            setShortMovieTumbler(shortMovieFilter === 'on' ? true : false);
+            } else setValue({ text: searchText, short: shortFilter });
+            setTumbler(shortFilter === 'off' ? true : false);
             return;
         }
+        
     // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [type]);
 
@@ -66,7 +67,7 @@ export const SearchForm = ({
                         type='text'
                         placeholder={`Фильм`}
                         onChange={handleChange}
-                        name='film'
+                        name='text'
                         vlaue={value.text}
                         required
                     />
@@ -80,10 +81,11 @@ export const SearchForm = ({
                 <label className='tumbler__label'>
                     <input 
                         className='checkbox'
-                        name='shortMode'
+                        name='short'
                         type='checkbox'
-                        value={value.shortMode}
-                        onChange={handleShortTumbler}
+                        value={value.short}
+                        onChange={handleShort}
+                        checked={tumbler}
                     />
                     <span className='checkbox__icon'></span>
                     Короткометражки

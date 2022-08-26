@@ -13,7 +13,7 @@ import {
     ADD_2_TO_LIST,
 } from '../../consts/consts.js';
 
-export const MoviesCardList = ({ moviesList, type, onClickMovieBtn }) => {
+export const MoviesCardList = ({ arrayMovie, type, onClickMovieBtn }) => {
     const [counter, setCounter] = useState();
     const [moreCard, setMoreCard] = useState();
 
@@ -29,8 +29,8 @@ export const MoviesCardList = ({ moviesList, type, onClickMovieBtn }) => {
     };
 
     useEffect(() => {
-        const VPWidth = window.innerWidth;
-        defineCardAmount(VPWidth);
+        const viewWidth = window.innerWidth;
+        defineCardAmount(viewWidth);
     }, []);
 
     const useCounter = () => setCounter((...initial) => Number(initial) + moreCard);
@@ -49,7 +49,7 @@ export const MoviesCardList = ({ moviesList, type, onClickMovieBtn }) => {
         <section className='movies-card-list'>
             <ul className='movies-card-list__list'>
                 {type === 'all'
-                    ? moviesList.slice(0, counter).map((movie) => {
+                    ? arrayMovie.slice(0, counter).map((movie) => {
                         return (
                             <MoviesCard 
                                 movie={movie}
@@ -59,7 +59,7 @@ export const MoviesCardList = ({ moviesList, type, onClickMovieBtn }) => {
                             />
                         );
                     })    
-                    : moviesList.map((movie) => {
+                    : arrayMovie.map((movie) => {
                         return (
                             <MoviesCard 
                                 movie={movie}
@@ -70,7 +70,7 @@ export const MoviesCardList = ({ moviesList, type, onClickMovieBtn }) => {
                         );
                     })}     
             </ul>
-            {type === 'all' && moviesList.length > counter && (
+            {type === 'all' && arrayMovie.length > counter && (
                 <More useCounter={useCounter} />
             )}
         </section>

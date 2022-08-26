@@ -3,8 +3,11 @@
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    border-radius: 6px;
     position: relative;
+}
+
+.trailer__link {
+    width: 100%;
 }
 
 .movie__poster {
@@ -12,6 +15,8 @@
     height: 201px;
     object-fit: contain;
     object-position: center;
+    border-radius: 6px;
+    background-color: #1e1e23;
 }
 
 .movie__add-btn {

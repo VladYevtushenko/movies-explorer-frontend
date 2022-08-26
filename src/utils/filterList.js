@@ -1,29 +1,29 @@
 import { SHORT_MOVIE_LENGHT } from "../consts/consts";
 
 export const filterList = () => {
-    const allMoviesList = JSON.parse(localStorage.getItem('allMoviesList'));
-    const searchMovie = localStorage.getItem('searchMovie');
-    const shortMovieFilter = localStorage.getItem('shortMovieFilter');
+    const arrayAllMovies = JSON.parse(localStorage.getItem('arrayAllMovies'));
+    const searchText = localStorage.getItem('searchText');
+    const shortFilter = localStorage.getItem('shortFilter');
 
-    const filteredList = allMoviesList.filter(
-        (movie) => movie.nameRU.toLowerCase().indexOf(searchMovie) >= 0
+    const filteredArray = arrayAllMovies.filter(
+        (movie) => movie.nameRU.toLowerCase().indexOf(searchText) >= 0
     );
-    if (shortMovieFilter === 'on') {
-        const shortList = filteredList.filter(
-            (movie) => movie.lenght < SHORT_MOVIE_LENGHT
+    if (shortFilter === 'on') {
+        const shortArray = filteredArray.filter(
+            (movie) => movie.duration < SHORT_MOVIE_LENGHT
         );
-        return shortList;
-    } else return filteredList
+        return shortArray;
+    } else return filteredArray;
 };
 
-export const filterSavedList = (list, searchMovie, shortMode) => {
-    const filteredList = list.filter(
-        (movie) => movie.nameRu.indexOf(searchMovie) >= 0
+export const filterSavedList = (array, searchText, short) => {
+    const filteredArray = array.filter(
+        (movie) => movie.nameRu.indexOf(searchText) >= 0
     );
-    if (shortMode === 'on') {
-        const shortList = filteredList.filter(
-            (movie) => movie.lenght < SHORT_MOVIE_LENGHT
+    if (short === 'on') {
+        const shortArray = filteredArray.filter(
+            (movie) => movie.duration < SHORT_MOVIE_LENGHT
         );
-        return shortList;
-    } else return filteredList;
+        return shortArray;
+    } else return filteredArray;
 }; 

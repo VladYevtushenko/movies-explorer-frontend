@@ -14,7 +14,7 @@ const getResponseData = (res) => {
 export const getMovies = async () => {
     const response = await fetch(MOVIE_API_URL, {
         headers: {
-            Accept: 'application/json',
+            // Accept: 'application/json',
             'Content-Type': 'application/json',
         },
     });

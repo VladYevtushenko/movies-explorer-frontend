@@ -1,12 +1,24 @@
 import React from 'react';
 import './AuthBtn.css';
-export const AuthBtn = ({btnText}) => {
+import classNames from 'classnames';
+
+export const AuthBtn = ({btnText, onClick, isValid, resultMessage, type}) => {
+    const classSaveButton = classNames(`button`, {
+        button_disabled: !isValid,
+    });
+
     return (
-        <button
-            type='button'
-            className='button'
-        >
-            {btnText}
-        </button>
+        <>
+            <span className='button__error'>{resultMessage}</span>
+                <button
+                    type='submit'
+                    className={classSaveButton}
+                    onClick={onClick}
+                    disabled={isValid}
+                    form={type}
+                >
+                    {btnText}
+                </button>
+        </>
     );
 };

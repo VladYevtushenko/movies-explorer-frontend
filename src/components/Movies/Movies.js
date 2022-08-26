@@ -9,57 +9,56 @@ import { getMovies } from '../../utils/MoviesApi';
 import { NOT_FOUND_MESSAGE, SERVER_ERROR_SEARCH } from '../../consts/consts';
 import { filterList } from '../../utils/filterList';
 
-export const Movies = ({ loggedIn, onClickMovieBtn, openResultMessage }) => {
+export const Movies = ({ loggedIn, onClickSaveMovie, openResultMessage }) => {
     const [preloaderOn, setPreloaderOn] = useState(false);
-    const [filteredMoviesList, setFilteredMoviesList] = useState([]);
+    const [filteredArrayMovies, setFilteredArrayMovies] = useState([]);
     const [isRender, setIsRender] = useState(true);
 
-    const requestList = async (data) => {
+    const requestList = async (searchData) => {
         setPreloaderOn(true);
-        const allMoviesList = localStorage.getItem('allMoviesList');
+        const arrayAllMovies = localStorage.getItem('arrayAllMovies');
 
-        if (!allMoviesList) {
-            const completeMoviesList = await getMovies();
-
-            if (completeMoviesList) {
-                localStorage.setItem('allMoviesList', JSON.stringify(completeMoviesList));
-
+        if (!arrayAllMovies) {
+            const allMovies = await getMovies();
+            if (allMovies) {
+                localStorage.setItem('arrayAllMovies', JSON.stringify(allMovies));
             } else {
                 openResultMessage(SERVER_ERROR_SEARCH);
             }
         }
-        localStorage.setItem('searchMovie', data.text.toLowerCase());
-        localStorage.setItem('shortMovieFilter', data.shortMovie);
-        const listSearch = filterList();
-        return renderMoviesList(listSearch);
+
+        localStorage.setItem('searchText', searchData.text.toLowerCase());
+        localStorage.setItem('shortFilter', searchData.short);
+        const arraySearch = filterList();
+        return renderMoviesList(arraySearch);
     };
 
-    const onClickShortMovieBtn = (data) => {
-        localStorage.setItem('shortMovieFilter', data);
-        const listSearch = filterList();
-        return renderMoviesList(listSearch);
+    const onClickShortMovieBtn = (searchData) => {
+        localStorage.setItem('shortFilter', searchData);
+        const arraySearch = filterList();
+        return renderMoviesList(arraySearch);
     };
 
-    const renderMoviesList = (list) => {
-        if (list.length === 0) {
+    const renderMoviesList = (array) => {
+        if (array.length === 0) {
             openResultMessage(NOT_FOUND_MESSAGE);
         } else { 
-            setFilteredMoviesList(list);
+            setFilteredArrayMovies(array);
         }
         setIsRender(true);
         return setPreloaderOn(false);
     }; 
 
     useEffect(() => {
-        const allMoviesList = localStorage.getItem('allMoviesList');
-        if (!allMoviesList) {
+        const arrayAllMovies = localStorage.getItem('arrayAllMovies');
+
+        if (!arrayAllMovies) {
             setIsRender(false);
             return;
         }
-        const listSearch = filterList();
+        const arraySearch = filterList();
         setIsRender(true);
-        renderMoviesList(listSearch);
-
+        renderMoviesList(arraySearch);
     // eslint-disable-next-line react-hooks/exhaustive-deps
     }, []);
 
@@ -70,7 +69,7 @@ export const Movies = ({ loggedIn, onClickMovieBtn, openResultMessage }) => {
                 <SearchForm 
                     requestList={requestList}
                     openResultMessage={openResultMessage}
-                    type={'completeMoviesList'}
+                    type={'allMovies'}
                     onClickShortMovieBtn={onClickShortMovieBtn}
                 />
                 {preloaderOn ? (
@@ -78,9 +77,9 @@ export const Movies = ({ loggedIn, onClickMovieBtn, openResultMessage }) => {
                 ) : (
                     isRender && (
                         <MoviesCardList 
-                            moviesList={filteredMoviesList}
+                            arrayMovie={filteredArrayMovies}
                             type={'all'}
-                            onClickMovieBtn={onClickMovieBtn}
+                            onClickMovieBtn={onClickSaveMovie}
                         />
                     )
                 )}
