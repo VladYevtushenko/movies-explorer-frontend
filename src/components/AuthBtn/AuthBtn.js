@@ -12,9 +12,9 @@ export const AuthBtn = ({btnText, onClick, isValid, resultMessage, type}) => {
             <span className='button__error'>{resultMessage}</span>
                 <button
                     type='submit'
-                    className={classSaveButton}
+                    // className={classSaveButton}
                     onClick={onClick}
-                    disabled={isValid}
+                    // disabled={!isValid}
                     form={type}
                 >
                     {btnText}

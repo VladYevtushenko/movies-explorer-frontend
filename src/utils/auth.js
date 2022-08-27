@@ -6,7 +6,7 @@ const headers = {
 };
 // registration 
 
-export const register = async (email, password, name) => {
+export const register = async ({ email, password, name }) => {
     const res = await fetch(`${MAIN_API_URL}/signup`, {
         method: 'POST',
         headers: headers,
@@ -18,20 +18,13 @@ export const register = async (email, password, name) => {
 
 // auth
 
-export const authorize = async (email, password) => {
+export const authorize = async ({ email, password }) => {
     const res = await fetch (`${MAIN_API_URL}/signin`, {
         method: 'POST',
         headers: headers,
         body: JSON.stringify({email, password}),
         credentials: 'include'
-    }
-        .then((data) => {
-            if (data.token) {
-                localStorage.setItem('jwt', data.token);
-                return data;
-            }
-        })
-    );
+    })
     return await getResponse(res);
 }
 

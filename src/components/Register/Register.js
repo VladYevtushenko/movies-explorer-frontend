@@ -8,7 +8,7 @@ import { AuthInput } from '../AuthInput/AuthInput';
 import { AuthBtn } from '../AuthBtn/AuthBtn';
 import { AuthCaption } from '../AuthCaption/AuthCaption';
 
-export const Register = ({ type, resultMessage, isAccept, onclick }) => {
+export const Register = ({ type, resultMessage, isAccept, signUp }) => {
     const [messageError, setMessageError] = useState({
         name: '',
         email: '',
@@ -20,24 +20,28 @@ export const Register = ({ type, resultMessage, isAccept, onclick }) => {
         password: '',
     });
 
-    const [isValid, setIsValid] = useState(true);
+    const [isValid, setIsValid] = useState(false);
 
-    const handleChange = (evt) => {
-        const { name, value } = evt.target;
+    const handleChange = (e) => {
+        e.preventDefault();
+        const { name, value } = e.target;
         setUserData((prev) => ({...prev, [name]: value}));
         setMessageError((prev) => ({
             ...prev,
-            [name]: evt.target.validationMessage,
-        }))
+            [name]: e.target.validationMessage,
+        }));
     };
 
-    const registration = (e) => {
+    const submitReg = (e) => {
+        e.preventDefault();
         if (type === 'signup' && 
             (!userData.name || !userData.password || !userData.email)
         ) {
+            console.log({userData});
             return;
         } else {
-            return onclick(userData);
+            // console.log({userData});
+            signUp(userData);
         }
     };
     
@@ -57,7 +61,7 @@ export const Register = ({ type, resultMessage, isAccept, onclick }) => {
             <AuthLogo />
             <AuthTitle titleText="Добро пожаловать!" />
             <AuthBox>
-                <AuthForm type={'signup'} name='signup' isAccept={isAccept}>
+                <AuthForm type={'signup'} name='signup' isAccept={isAccept} onSubmit={submitReg}>
                     <AuthInput 
                         lableText='Имя' 
                         type='text'
@@ -91,10 +95,10 @@ export const Register = ({ type, resultMessage, isAccept, onclick }) => {
                     />
                     <AuthBtn 
                         btnText='Зарегистрироваться' 
-                        onclick={registration}
+                        // submitReg={submitReg}
                         disabled={!isValid}
                         resultMessage={resultMessage}
-                        form={type}
+                        form={'signup'}
                     />
                 </AuthForm>
             </AuthBox>

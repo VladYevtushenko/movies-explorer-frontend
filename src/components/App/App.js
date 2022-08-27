@@ -80,8 +80,7 @@ export const App = () => {
         setIsAccept(false);
     
         const response = await register(userData);
-    
-        if (response._id) {
+        if (response.data._id) {
             setIsAccept(true);
             setResultMessage(SUCCESS_REG_MESSAGE);
             setIsAccept(false);
@@ -106,6 +105,7 @@ export const App = () => {
     // Authorisation
 
     const onLogin = async (userData) => {
+        
         setResultMessage('');
         setIsAccept(false);
 
@@ -114,6 +114,7 @@ export const App = () => {
             password: userData.password
         };
         const res = await authorize(userDataAuth);
+        console.log({res});
 
         if (res.token) {
             localStorage.setItem('jwt', res.token);
