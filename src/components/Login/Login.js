@@ -8,7 +8,7 @@ import { AuthInput } from '../AuthInput/AuthInput';
 import { AuthBtn } from '../AuthBtn/AuthBtn';
 import { AuthCaption } from '../AuthCaption/AuthCaption';
 
-export const Login = ({ type, isAccept }) => {
+export const Login = ({ type, isAccept, onLogin }) => {
     const [messageError, setMessageError] = useState({
         email: '',
         password: '',
@@ -30,10 +30,11 @@ export const Login = ({ type, isAccept }) => {
     };
 
     const login = (e) => {
+        e.preventDefault();
         if (type === 'signin' && (!userData.password || !userData.email)) {
             return;
         } else {
-            return onclick(userData);
+            return onLogin(userData);
         }
     };
     
@@ -54,7 +55,7 @@ export const Login = ({ type, isAccept }) => {
             <AuthLogo />
             <AuthTitle titleText="Рады видеть!" />
             <AuthBox>
-                <AuthForm type='signin' isAccept={isAccept}>
+                <AuthForm type='signin' isAccept={isAccept} onSubmit={login}>
                     <AuthInput 
                         lableText='E-mail' 
                         type='email'
@@ -74,14 +75,16 @@ export const Login = ({ type, isAccept }) => {
                         onChange={handleChange}
                         messageError={messageError.password}
                     />
+                    <AuthBtn 
+                        btnText='Войти'
+                        // onclick={login}
+                        disabled={isValid}
+                        isAccept={!isAccept}
+                        form={'signin'}
+                    />
                 </AuthForm>
             </AuthBox>
-            <AuthBtn 
-                btnText='Войти'
-                onclick={login}
-                disabled={isValid}
-                isAccept={!isAccept}
-            />
+            
             <AuthCaption 
                 text='Ещё не зарегистрированы?'
                 linkText='Регистрация'

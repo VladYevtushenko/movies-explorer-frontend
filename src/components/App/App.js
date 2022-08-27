@@ -114,13 +114,15 @@ export const App = () => {
             password: userData.password
         };
         const res = await authorize(userDataAuth);
-        console.log({res});
+        // console.log({res});
 
         if (res.token) {
             localStorage.setItem('jwt', res.token);
             setLoggedIn(true);
             const user = await getUserInfo();
+            console.log({user});
             const movies = await getMovies();
+            console.log({movies});
             setCurrentMovies(movies);
             setCurrentUser(user);
             navigate('/movies');
