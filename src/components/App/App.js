@@ -32,7 +32,7 @@ import {
     EMAIL_PASSWORD_ERROR,
     CONFLICT_ERROR,
     SUCCESS_REG_MESSAGE,
-    CONFLICT,
+    CONFLICT_STATUS,
     UNAUTHORIZED_ERROR
 } from '../../consts/consts';
 
@@ -42,10 +42,11 @@ export const App = () => {
     const navigate = useNavigate();
     const [currentUser, setCurrentUser] = useState({});
     const [currentMovies, setCurrentMovies] = useState([]);
-    const [isMessageBannerOpen, setMessageBanner] = useState(false);
     const [resultMessage, setResultMessage] = useState('');
     const [loggedIn, setLoggedIn] = useState(false);
     const [isAccept, setIsAccept] = useState(true);
+    const [isMessageBannerOpen, setMessageBanner] = useState(false);
+
     let messageClean;
 
     // check token
@@ -79,20 +80,23 @@ export const App = () => {
         setResultMessage('');
         setIsAccept(false);
     
-        const response = await register(userData);
-        if (response.data._id) {
-            setIsAccept(true);
-            setResultMessage(SUCCESS_REG_MESSAGE);
-            setIsAccept(false);
-            messageClean = setTimeout(() => {
-                setIsAccept(true);
-                setResultMessage('');
-            }, 5000);
-            return onLogin(userData);
-        }
-        if (response.message === CONFLICT) {
+        const res = await register(userData);
+        if (res.message === CONFLICT_STATUS) {
             setResultMessage(CONFLICT_ERROR);
-        } else {
+            messageClean = setTimeout(() => {
+                setIsAccept(false);
+                setResultMessage('');
+            }, 3000);
+        } else if (res.data._id) {
+                setIsAccept(true);
+                setResultMessage(SUCCESS_REG_MESSAGE);
+                setIsAccept(false);
+                messageClean = setTimeout(() => {
+                    setIsAccept(true);
+                    setResultMessage('');
+                }, 3000);
+                return onLogin(userData);
+            } else {
             setResultMessage(SERVER_ERROR);
         }
         setIsAccept(false);
@@ -100,12 +104,12 @@ export const App = () => {
             setIsAccept(true);
             setResultMessage('');
         }, 5000);
+        
     };
 
     // Authorisation
 
     const onLogin = async (userData) => {
-        
         setResultMessage('');
         setIsAccept(false);
 
@@ -114,7 +118,7 @@ export const App = () => {
             password: userData.password
         };
         const res = await authorize(userDataAuth);
-        // console.log({res});
+        console.log({res});
 
         if (res.token) {
             localStorage.setItem('jwt', res.token);
@@ -126,7 +130,7 @@ export const App = () => {
             setCurrentMovies(movies);
             setCurrentUser(user);
             navigate('/movies');
-        }
+        } else 
         if (res.message === UNAUTHORIZED_ERROR) {
             setResultMessage(EMAIL_PASSWORD_ERROR);
             setIsAccept(false);
@@ -247,7 +251,7 @@ export const App = () => {
                                         <Profile 
                                             loggedIn={loggedIn}
                                             signOut={signOut}
-                                            resultMessage={resultMessage}
+                                            resultMessage={setResultMessage}
                                             isAccept={isAccept}
                                         />
                                     </ProtectedRoute>

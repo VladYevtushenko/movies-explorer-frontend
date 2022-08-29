@@ -12,11 +12,11 @@ const getResponseData = (res) => {
 };
 
 export const getMovies = async () => {
-    const response = await fetch(MOVIE_API_URL, {
+    const res = await fetch(MOVIE_API_URL, {
         headers: {
             // Accept: 'application/json',
             'Content-Type': 'application/json',
         },
     });
-    return await getResponseData(response);
+    return await getResponseData(res);
 };

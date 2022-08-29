@@ -19,7 +19,7 @@ export const AuthInput = ({
             <label className='input input__label'>
                 {lableText}
                 <input 
-                    className='input__input'
+                    className='input__item'
                     type={type}
                     name={name}
                     minLength={minLength}

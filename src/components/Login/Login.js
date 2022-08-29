@@ -5,10 +5,14 @@ import { AuthTitle } from '../AuthTitle/AuthTitle';
 import { AuthBox } from '../AuthBox/AuthBox';
 import { AuthForm } from '../AuthForm/AuthForm';
 import { AuthInput } from '../AuthInput/AuthInput';
-import { AuthBtn } from '../AuthBtn/AuthBtn';
 import { AuthCaption } from '../AuthCaption/AuthCaption';
+import classNames from 'classnames';
 
-export const Login = ({ type, isAccept, onLogin }) => {
+export const Login = ({ resultMessage, isAccept, onLogin }) => {
+    console.log({resultMessage});
+
+    const type = 'signin';
+
     const [messageError, setMessageError] = useState({
         email: '',
         password: '',
@@ -49,13 +53,17 @@ export const Login = ({ type, isAccept, onLogin }) => {
         setIsValid(true);
     }, [messageError, userData, type]);
 
+    const classSaveButton = classNames(`button`, {
+        button_disabled: !isValid,
+        'button_disabled button__span': !isAccept,
+    });
 
     return (
         <section className='login'>
             <AuthLogo />
             <AuthTitle titleText="Рады видеть!" />
             <AuthBox>
-                <AuthForm type='signin' isAccept={isAccept} onSubmit={login}>
+                <AuthForm type={type} name='signin' isAccept={isAccept} onSubmit={login}>
                     <AuthInput 
                         lableText='E-mail' 
                         type='email'
@@ -75,13 +83,14 @@ export const Login = ({ type, isAccept, onLogin }) => {
                         onChange={handleChange}
                         messageError={messageError.password}
                     />
-                    <AuthBtn 
-                        btnText='Войти'
-                        // onclick={login}
-                        disabled={isValid}
-                        isAccept={!isAccept}
-                        form={'signin'}
-                    />
+                    {!isAccept && <p className='form__error'>{ resultMessage }</p>}
+                    <button 
+                        type='button'
+                        className={classSaveButton}
+                        onClick={login}
+                        disabled={!isValid}
+                        form={type}
+                    >Войти</button>
                 </AuthForm>
             </AuthBox>
             

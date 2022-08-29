@@ -5,10 +5,12 @@ import { AuthTitle } from '../AuthTitle/AuthTitle';
 import { AuthBox } from '../AuthBox/AuthBox';
 import { AuthForm } from '../AuthForm/AuthForm';
 import { AuthInput } from '../AuthInput/AuthInput';
-import { AuthBtn } from '../AuthBtn/AuthBtn';
 import { AuthCaption } from '../AuthCaption/AuthCaption';
+import classNames from 'classnames';
 
-export const Register = ({ type, resultMessage, isAccept, signUp }) => {
+export const Register = ({ resultMessage, isAccept, signUp }) => {
+    console.log({resultMessage});
+    const type = 'signup';
     const [messageError, setMessageError] = useState({
         name: '',
         email: '',
@@ -21,6 +23,11 @@ export const Register = ({ type, resultMessage, isAccept, signUp }) => {
     });
 
     const [isValid, setIsValid] = useState(false);
+
+    const classSaveButton = classNames(`button`, {
+        button_disabled: !isValid,
+        'button_disabled button__span': !isAccept,
+    });
 
     const handleChange = (e) => {
         e.preventDefault();
@@ -37,11 +44,9 @@ export const Register = ({ type, resultMessage, isAccept, signUp }) => {
         if (type === 'signup' && 
             (!userData.name || !userData.password || !userData.email)
         ) {
-            console.log({userData});
             return;
         } else {
-            // console.log({userData});
-            signUp(userData);
+            return signUp(userData);
         }
     };
     
@@ -61,7 +66,7 @@ export const Register = ({ type, resultMessage, isAccept, signUp }) => {
             <AuthLogo />
             <AuthTitle titleText="Добро пожаловать!" />
             <AuthBox>
-                <AuthForm type={'signup'} name='signup' isAccept={isAccept} onSubmit={submitReg}>
+                <AuthForm type={type} name='signup' isAccept={isAccept} onSubmit={signUp}>
                     <AuthInput 
                         lableText='Имя' 
                         type='text'
@@ -93,13 +98,14 @@ export const Register = ({ type, resultMessage, isAccept, signUp }) => {
                         onChange={handleChange}
                         messageError={messageError.password}
                     />
-                    <AuthBtn 
-                        btnText='Зарегистрироваться' 
-                        // submitReg={submitReg}
+                    {!isAccept && <p className='form__error'>{ resultMessage }</p>}
+                    <button 
+                        type='button'
+                        className={classSaveButton}
+                        onClick={submitReg}
                         disabled={!isValid}
-                        resultMessage={resultMessage}
-                        form={'signup'}
-                    />
+                        form={type}
+                    >Зарегистрироваться</button>
                 </AuthForm>
             </AuthBox>
             

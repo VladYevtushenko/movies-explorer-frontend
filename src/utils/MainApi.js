@@ -6,7 +6,6 @@ export const headers = {
 
 export const getResponse = (res) => {
     try {
-        // console.log({res});
         if (!res.ok) {
             throw new Error(res.status);
         }
