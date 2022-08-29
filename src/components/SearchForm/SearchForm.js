@@ -2,6 +2,7 @@ import { useEffect, useState } from 'react';
 import './SearchForm.css';
 import lupa from '../../images/lupa-icon.svg';
 import { USE_TEXT_MESSAGE } from '../../consts/consts';
+import classNames from 'classnames';
 
 export const SearchForm = ({
     requestList,
@@ -14,9 +15,14 @@ export const SearchForm = ({
     const [messageError, setMessageError] = useState('');
     const [isValid, setIsValid] = useState(true);
 
+    const searchBtnClass = classNames(`search-form__btn`, {
+        'search-form__btn_disabled': !isValid,
+    });
+
     const handleChange = (evt) => {
         evt.preventDefault();
         const { value } = evt.target;
+        console.log({value});
         setValue((prev) => ({ ...prev, text: value }));
         setMessageError(evt.target.validationMessage);
     };
@@ -28,8 +34,10 @@ export const SearchForm = ({
         return onClickShortMovieBtn(valueNew);
     };
 
-    const onClickMovieSearchBtn = () => {
-        if (messageError) {
+    const onClickMovieSearchBtn = (e) => {
+        e.preventDefault();
+        console.log({messageError});
+        if (messageError === '') {
             return openResultMessage(USE_TEXT_MESSAGE);
         } else return requestList(value);
     };
@@ -59,7 +67,7 @@ export const SearchForm = ({
 
     return (
         <section className='search-form'>
-            <form className='search-form__box'>
+            <form className='search-form__box' name='search'>
                 <div className='search-form__field'>
                     <img className='lupa' src={lupa} alt='lupa icon' />
                     <input 
@@ -70,12 +78,14 @@ export const SearchForm = ({
                         name='text'
                         vlaue={value.text}
                         required
+                        form='search'
                     />
                     <button 
-                        className='search-form__btn'
+                        className={searchBtnClass}
                         type='button'
                         disabled={!isValid}
                         onClick={(e) => onClickMovieSearchBtn(e)}
+                        form='search'
                     ></button>
                 </div>
                 <label className='tumbler__label'>
@@ -91,7 +101,11 @@ export const SearchForm = ({
                     Короткометражки
                 </label>
             </form>
-            {messageError && <span className='search-form__error'>{messageError}</span>}
+            {messageError && 
+                <span 
+                    className='search-form__error'
+                    form='search'
+                >{messageError}</span>}
         </section>
     );
 };

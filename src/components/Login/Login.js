@@ -9,8 +9,6 @@ import { AuthCaption } from '../AuthCaption/AuthCaption';
 import classNames from 'classnames';
 
 export const Login = ({ resultMessage, isAccept, onLogin }) => {
-    console.log({resultMessage});
-
     const type = 'signin';
 
     const [messageError, setMessageError] = useState({

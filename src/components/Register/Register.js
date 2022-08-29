@@ -9,7 +9,6 @@ import { AuthCaption } from '../AuthCaption/AuthCaption';
 import classNames from 'classnames';
 
 export const Register = ({ resultMessage, isAccept, signUp }) => {
-    console.log({resultMessage});
     const type = 'signup';
     const [messageError, setMessageError] = useState({
         name: '',
