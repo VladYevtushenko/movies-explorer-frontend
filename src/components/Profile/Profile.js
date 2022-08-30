@@ -7,7 +7,6 @@ import { Link } from 'react-router-dom';
 import { Header } from '../Header/Header';
 
 export const Profile = ({
-    name,
     signOut,
     onClickUpdateProfile,
     resultMessage,
@@ -15,15 +14,18 @@ export const Profile = ({
     loggedIn
 }) => {
     const currentUser = useContext(CurrentUserContext);
+    
     const [edit, setEdit] = useState(false);
     const [messageError, setMessageError] = useState({ name: '', email: '' });
-    const [userDataUpdate, setUserDataUpdate] = useState({ name: '', email: '' });
+    const [userDataUpdate, setUserDataUpdate] = useState({ name: '', email: '' });    
     const [isValid, setIsValid] = useState(true);
+
     const classSaveButton = classNames(`profile__button`, {
         'profile__button_disabled': !isValid,
         'profile__button_disabled profile__button_span': !isAccept,
 
     });
+
     useEffect(() => {
         setUserDataUpdate({ name: currentUser.name, email: currentUser.email });
     }, [currentUser]);
@@ -38,10 +40,10 @@ export const Profile = ({
     };
 
     const updateProfile = (e) => {
+        e.preventDefault();
         if (messageError.name && messageError.email) {
             return;
         }
-        e.preventDefoult();
         onClickUpdateProfile(userDataUpdate);
     };
 
@@ -61,9 +63,9 @@ export const Profile = ({
         <>
             <Header loggedIn={loggedIn} />
             <section className='profile'>
-                <FormTitle userName={name}/>  
+                <FormTitle userName={currentUser.name}/>  
                 <form className='profile__form'>
-                    <div className='profile__info'>
+                    <fieldset className='profile__info'>
                         <label 
                             className='profile__name'
                             htmlFor='name'
@@ -78,18 +80,19 @@ export const Profile = ({
                             type='text'
                             required
                             minLength={2}
+                            maxLength={100}
                             onChange={handleChange}
                             placeholder='Имя'
                             pattern='^[A-Za-zА-Яа-яЁё /s -]+$'
                             disabled={!edit}
                         />
-                    </div>
+                    </fieldset>
                     {messageError.name && (
                         <span className='input__error'>
                             {messageError.name}
                         </span>
                     )}
-                    <div className='profile__info profile__info_email'>
+                    <fieldset className='profile__info profile__info_email'>
                         <label className='profile__name profile__name_email'>
                             E-mail
                         </label>
@@ -100,13 +103,12 @@ export const Profile = ({
                             id='email'
                             type='email'
                             placeholder='email'
-                            pattern='/https?:\/\/(\w+:{0,1}\w*@)?(\S+)(:[0-9]+)?(\/|\/([\w#!:.?+=&%@!\-/]))?/'
                             required
                             onChange={handleChange}
                             disabled={!edit}
                             title='email'
                         />
-                    </div>
+                    </fieldset>
                     {messageError.email && (
                         <span className='input__error'>
                             {messageError.email}
@@ -124,14 +126,12 @@ export const Profile = ({
                         </button>
                     ) : (
                         <>
-                            <button
-                                className={classSaveButton}
-                                disabled={!isValid}
-                                type='submit'
+                            <p
+                                className='profile__button'
                                 onClick={() => setEdit(!edit)}
                             >
                                 Редактировать
-                            </button>
+                            </p>
                             <Link 
                                 className='profile__logout' 
                                 to='/'

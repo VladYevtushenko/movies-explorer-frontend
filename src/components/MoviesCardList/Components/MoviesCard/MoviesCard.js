@@ -3,13 +3,18 @@ import { CurrentMoviesSaveContext } from '../../../../contexts/CurrentMoviesSave
 import './MoviesCard.css';
 
 export const MoviesCard = ({ movie, type, onClickMovieBtn }) => {
+    console.log({movie});
 
     const CurrentMoviesSave = useContext(CurrentMoviesSaveContext);
     const { nameRU, duration, image } = movie;
     const movieData = CurrentMoviesSave.filter((el) => el.movieId === movie.id);
-    const isSave = movieData.lenght > 0;
+    const isSave = movieData.lenght >= 0;
+    
+    console.log({CurrentMoviesSave});
+    console.log({movieData});
+    console.log({isSave});
 
-
+    
     const transformMins = (minutes) => {
         const hours = Math.trunc(minutes / 60);
         const mins = minutes % 60;
@@ -36,7 +41,7 @@ export const MoviesCard = ({ movie, type, onClickMovieBtn }) => {
                 isSave ? (
                     <button 
                         type='button'
-                        className='movie__add-btn movie__add-btn_type_saved' 
+                        className='movie__add-btn movie__add-btn_type_delete' 
                         onClick={() => onClickMovieBtn(movie, 'delete', movieData[0]._id)}
                     />
                     ) : (
@@ -49,7 +54,7 @@ export const MoviesCard = ({ movie, type, onClickMovieBtn }) => {
                 ) : (
                     <button 
                         type='button' 
-                        className='movie__add-btn movie__add-btn_type_delete' 
+                        className='movie__add-btn movie__add-btn_type_saved' 
                         onClick={() => onClickMovieBtn(movie._id)}
                     />
                 )}   

@@ -9,7 +9,7 @@ import { getMovies } from '../../utils/MoviesApi';
 import { NOT_FOUND_MESSAGE, SERVER_ERROR_SEARCH } from '../../consts/consts';
 import { filterList } from '../../utils/filterList';
 
-export const Movies = ({ loggedIn, onClickSaveMovie, openResultMessage, messageError }) => {
+export const Movies = ({ loggedIn, onClickSaveMovie, openResultMessage }) => {
     const [preloaderOn, setPreloaderOn] = useState(false);
     const [filteredArrayMovies, setFilteredArrayMovies] = useState([]);
     const [isRender, setIsRender] = useState(true);

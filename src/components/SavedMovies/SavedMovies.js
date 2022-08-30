@@ -19,7 +19,11 @@ export const SavedMovies = ({
     const [filteredArrayMovies, setFilteredArrayMovies] = useState(currentMovies);
     const [searchText, setSearchText] = useState('');
 
+    console.log({currentMovies});
+    console.log({filteredArrayMovies});
+
     const requestList = (searchData) => {
+    console.log({searchData});
         setSearchText(searchData.text.toLowerCase());
         setPreloaderOn(true);
         const arraySearch = filterSavedList(
@@ -27,6 +31,7 @@ export const SavedMovies = ({
             searchData.text.toLowerCase(),
             searchData.short
         );
+        console.log({arraySearch});
         return renderArray(arraySearch);
     };
 

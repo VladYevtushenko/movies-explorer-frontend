@@ -39,13 +39,13 @@ export const getContent = async () => {
     return await getResponse(res);
 };
 
-//signout 
+// //signout 
 
-export const signOut = async () => {
-    const res = await fetch(`${MAIN_API_URL}/users/me`, {
-        method: 'GET',
-        headers: headers,
-        credentials: 'include'
-    });
-    return await getResponse(res);
-};
+// export const logOut = async () => {
+//     const res = await fetch(`${MAIN_API_URL}/users/me`, {
+//         method: 'GET',
+//         headers: headers,
+//         credentials: 'include'
+//     });
+//     return await getResponse(res);
+// };

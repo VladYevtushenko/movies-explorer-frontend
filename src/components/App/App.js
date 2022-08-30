@@ -23,6 +23,7 @@ import {
     getUserInfo,
     addToSavedMovies,
     deleteFromSavedMovies,
+    updateUserData,
 } from '../../utils/MainApi';
 import { 
     MOVIE_DEL_MESSAGE,
@@ -33,7 +34,8 @@ import {
     CONFLICT_ERROR,
     SUCCESS_REG_MESSAGE,
     CONFLICT_STATUS,
-    UNAUTHORIZED_ERROR
+    UNAUTHORIZED_ERROR,
+    ACCAUNT_EDIT_SUCCES,
 } from '../../consts/consts';
 
 
@@ -118,15 +120,12 @@ export const App = () => {
             password: userData.password
         };
         const res = await authorize(userDataAuth);
-        console.log({res});
 
         if (res.token) {
             localStorage.setItem('jwt', res.token);
             setLoggedIn(true);
             const user = await getUserInfo();
-            console.log({user});
             const movies = await getMovies();
-            console.log({movies});
             setCurrentMovies(movies);
             setCurrentUser(user);
             navigate('/movies');
@@ -144,12 +143,39 @@ export const App = () => {
         }, 3000);
     };
 
+    // profile editing
+
+    const onClickUpdateProfile = async (userDataNew) => {
+        console.log({userDataNew});
+        
+        const res = await updateUserData(userDataNew);
+        console.log({res});
+        
+        if (res.email || res.name) {
+            setIsAccept(false);
+            setResultMessage(ACCAUNT_EDIT_SUCCES)
+            setCurrentUser(userDataNew);
+        } 
+        else if (res.message === CONFLICT_STATUS) {
+            setIsAccept(false);
+            setResultMessage(CONFLICT_ERROR);
+        } 
+        else {
+            setIsAccept(false);
+            setResultMessage(SERVER_ERROR);
+        }
+        messageClean = setTimeout(() => {
+            setIsAccept(true);
+            setResultMessage('');
+        }, 3000);
+    };
+
     // account signOut
 
     const signOut = () => {
         localStorage.removeItem('jwt');
         localStorage.removeItem('arrayAllMovies');
-        localStorage.removeItem('serachText');
+        localStorage.removeItem('searchText');
         localStorage.removeItem('shortFilter');
         setLoggedIn(false);
         setCurrentUser({});
@@ -171,6 +197,7 @@ export const App = () => {
     // add movie to savedMovies by id
 
     const onClickSaveMovie = async (movie, status, id) => {
+        // console.log({movie});
         if (status === 'delete') {
             onClickDeleteMovie(id);
             return;
@@ -181,11 +208,14 @@ export const App = () => {
             thumbnail: `https://api.nomoreparties.co${movie.image.formats.thumbnail.url}`,
             movieId: movie.id,
         };
+        // console.log({movieNew});
+        
         delete movieNew.id;
         delete movieNew.created_at;
         delete movieNew.updated_at;
         const res = await addToSavedMovies(movieNew);
-        if (res._id) {
+
+        if (res) {
             setCurrentMovies((prev) => [...prev, res]);
         }   else if (res.message === BAD_REQUEST) {
             setResultMessage(SAVE_ERROR_MESSAGE);
@@ -236,7 +266,7 @@ export const App = () => {
                                     <ProtectedRoute loggedIn={loggedIn}>
                                         <SavedMovies 
                                             loggedIn={loggedIn}
-                                            currentMovies={currentMovies}
+                                            currentMovies={setCurrentMovies}
                                             openResultMessage={openResultMessage}
                                             onClickDeleteMovie={onClickDeleteMovie}
                                         />
@@ -251,8 +281,9 @@ export const App = () => {
                                         <Profile 
                                             loggedIn={loggedIn}
                                             signOut={signOut}
-                                            resultMessage={setResultMessage}
+                                            resultMessage={resultMessage}
                                             isAccept={isAccept}
+                                            onClickUpdateProfile={onClickUpdateProfile}
                                         />
                                     </ProtectedRoute>
                                 } 

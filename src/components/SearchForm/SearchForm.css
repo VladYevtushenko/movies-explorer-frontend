@@ -57,11 +57,11 @@
 }
 
 .search-form__input:focus:active {
-    outline: 0;
-    outline-offset: 0;
+    outline: none;
     border: none;
     background-color: #222222;
-    outline-offset: none;
+    outline-offset: 0;
+    font-family: 'Inter', Arial, sans-serif;;
     font-weight: 400;
     font-size: 18px;
     line-height: 20px;

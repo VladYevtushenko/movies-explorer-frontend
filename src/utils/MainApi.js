@@ -26,6 +26,25 @@ export const getUserInfo = async () => {
     return await getResponse(res);
 };
 
+// user profile editing
+
+export const updateUserData = async (user) => {
+    console.log({user});
+    
+    const res = await fetch(`${MAIN_API_URL}/users/me`, {
+        method: 'PATCH',
+        headers: headers,
+        credentials: 'include',
+        body: JSON.stringify({
+            name: user.name,
+            email: user.email,
+        }),
+    });
+    console.log({res});
+    
+    return await getResponse(res);
+};
+
 // collect info about savedMovies
 
 export const getMovies = async () => {
@@ -38,12 +57,13 @@ export const getMovies = async () => {
 
 // add movie to savedMovies
 
-export const addToSavedMovies = async (movieData) => {
+export const addToSavedMovies = async (movie) => {
+    console.log({movie});
     const res = await fetch(`${MAIN_API_URL}/movies`, {
         method: 'POST',
         headers: headers,
         credentials: 'include',
-        body: JSON.stringify(movieData),
+        body: JSON.stringify(movie),
     });
     return await getResponse(res);
 };

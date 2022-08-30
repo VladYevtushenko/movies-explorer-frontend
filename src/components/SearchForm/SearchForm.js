@@ -12,7 +12,7 @@ export const SearchForm = ({
 }) => {
     const [value, setValue] = useState({text: '', short: 'off'});
     const [tumbler, setTumbler] = useState(false);
-    const [messageError, setMessageError] = useState('');
+    const [messageError, setMessageError] = useState("");
     const [isValid, setIsValid] = useState(true);
 
     const searchBtnClass = classNames(`search-form__btn`, {
@@ -22,7 +22,6 @@ export const SearchForm = ({
     const handleChange = (evt) => {
         evt.preventDefault();
         const { value } = evt.target;
-        console.log({value});
         setValue((prev) => ({ ...prev, text: value }));
         setMessageError(evt.target.validationMessage);
     };
@@ -34,13 +33,11 @@ export const SearchForm = ({
         return onClickShortMovieBtn(valueNew);
     };
 
-    const onClickMovieSearchBtn = (e) => {
-        e.preventDefault();
-        console.log({messageError});
-        if (messageError === '') {
+    const onClickMovieSearchBtn = () => {
+        if (messageError) {
             return openResultMessage(USE_TEXT_MESSAGE);
         } else return requestList(value);
-    };
+        };
 
     useEffect(() => {
         if (type === 'allMovies') {
@@ -84,7 +81,7 @@ export const SearchForm = ({
                         className={searchBtnClass}
                         type='button'
                         disabled={!isValid}
-                        onClick={(e) => onClickMovieSearchBtn(e)}
+                        onClick={onClickMovieSearchBtn}
                         form='search'
                     ></button>
                 </div>
