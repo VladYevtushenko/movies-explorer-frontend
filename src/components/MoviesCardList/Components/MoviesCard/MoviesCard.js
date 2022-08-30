@@ -1,9 +1,8 @@
-import { useContext } from 'react';
+import React, { useContext } from 'react';
 import { CurrentMoviesSaveContext } from '../../../../contexts/CurrentMoviesSaveContext';
 import './MoviesCard.css';
 
 export const MoviesCard = ({ movie, type, onClickMovieBtn }) => {
-    console.log({movie});
 
     const CurrentMoviesSave = useContext(CurrentMoviesSaveContext);
     const { nameRU, duration, image } = movie;

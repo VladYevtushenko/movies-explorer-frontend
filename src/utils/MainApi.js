@@ -52,6 +52,8 @@ export const getMovies = async () => {
         headers: headers,
         credentials: 'include',
     });
+    console.log({res});
+    
     return await getResponse(res);
 };
 

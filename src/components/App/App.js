@@ -196,10 +196,10 @@ export const App = () => {
 
     // add movie to savedMovies by id
 
-    const onClickSaveMovie = async (movie, status, id) => {
-        // console.log({movie});
-        if (status === 'delete') {
-            onClickDeleteMovie(id);
+    const onClickSaveMovie = async (movie) => {
+        console.log({movie});
+        if (movie.status === 'delete') {
+            onClickDeleteMovie(movie.id);
             return;
         }
         const movieNew = {
@@ -236,9 +236,9 @@ export const App = () => {
         setMessageBanner(true);
     };
 
-    useEffect(() => {
-        setIsAccept(true);
-    }, [navigate]);
+    // useEffect(() => {
+    //     setIsAccept(true);
+    // }, [navigate]);
 
     return (
         <CurrentUserContext.Provider value={currentUser}>

@@ -21,7 +21,7 @@ export const filterSavedList = (array, searchText, short) => {
     console.log({searchText});
     console.log({short});
     const filteredArray = array.filter(
-        (movie) => movie.nameRu.indexOf(searchText) >= [0]
+        (movie) => movie.nameRu.indexOf(searchText) >= 0
     );
     console.log({filteredArray});
     if (short === 'on') {
