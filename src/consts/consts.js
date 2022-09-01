@@ -27,7 +27,7 @@ export const SAVE_ERROR_MESSAGE = 'Что-то не так, фильм не мо
 
 // success message
 
-export const MOVIE_DEL_MESSAGE = 'Фильм удален!';
+export const MOVIE_DEL_MESSAGE = 'Фильм удален';
 export const SUCCESS_REG_MESSAGE = 'Вы успешно зарегистрировались';
 export const ACCAUNT_EDIT_SUCCES = 'Данные обновлены';
 

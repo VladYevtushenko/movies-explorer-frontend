@@ -188,11 +188,7 @@ export const App = () => {
     // remove movie from savedMovie
 
     const onClickDeleteMovie = async (id) => {
-        console.log({id});
-        
         const res = await deleteFromSavedMovies(id);
-        console.log({res});
-        
         if (res.message === MOVIE_DEL_MESSAGE) {
             setCurrentMovies((prev) => prev.filter((element) => element._id !== id));
         } else {
