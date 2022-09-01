@@ -18,14 +18,16 @@ export const AboutMe = () => {
                             <a 
                                 href='https://github.com/VladYevtushenko' 
                                 className='about-me__link' 
-                                target='blank'
+                                target='_blank'
+                                rel="noreferrer noopener"
                             >GitHub</a>
                         </li>
                         <li className='about-me__link-item'>
                             <a 
                                 href='https://www.instagram.com/vlad_yevtushenko' 
                                 className='about-me__link' 
-                                target='blank'
+                                target='_blank'
+                                rel="noreferrer noopener"
                             >Instagram</a>
                         </li>
                     </ul>

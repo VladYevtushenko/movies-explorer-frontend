@@ -22,7 +22,8 @@ export const MoviesCard = ({ movie, type, onClickMovieBtn }) => {
             <a 
                 className='trailer__link'
                 href={movie.trailerLink}
-                target='blank'
+                target='_blank'
+                rel="noreferrer noopener"
             >
                 <img 
                     className='movie__poster'
@@ -34,7 +35,6 @@ export const MoviesCard = ({ movie, type, onClickMovieBtn }) => {
                 isSave ? (
                     <button 
                         type='button'
-                        // disabled={true}
                         className='movie__add-btn movie__add-btn_type_saved' 
                         onClick={() => onClickMovieBtn(movie, 'delete', movieData[0]._id)}
                     />
