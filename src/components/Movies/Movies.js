@@ -28,7 +28,6 @@ export const Movies = ({ loggedIn, onClickSaveMovie, openResultMessage }) => {
         localStorage.setItem('searchText', searchData.text.toLowerCase());
         localStorage.setItem('shortFilter', searchData.short);
         const arraySearch = filterList();
-        console.log({arraySearch});
         
         return renderMoviesList(arraySearch);
     };
@@ -59,8 +58,6 @@ export const Movies = ({ loggedIn, onClickSaveMovie, openResultMessage }) => {
         const arraySearch = filterList();
         setIsRender(true);
         renderMoviesList(arraySearch);
-        console.log({arraySearch});
-        
     // eslint-disable-next-line react-hooks/exhaustive-deps
     }, []);
 

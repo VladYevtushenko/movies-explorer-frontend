@@ -12,7 +12,7 @@ export const SearchForm = ({
 }) => {
     const [value, setValue] = useState({text: '', short: 'off'});
     const [tumbler, setTumbler] = useState(false);
-    const [messageError, setMessageError] = useState("");
+    const [messageError, setMessageError] = useState('');
     const [isValid, setIsValid] = useState(true);
 
     const searchBtnClass = classNames(`search-form__btn`, {
@@ -26,7 +26,7 @@ export const SearchForm = ({
         setMessageError(evt.target.validationMessage);
     };
 
-    const handleShort = () => {
+    const handleShortTumbler = () => {
         const valueNew = value.short === 'off' ? 'on' : 'off';
         setValue((prev) => ({ ...prev, text: valueNew }));
         setTumbler(!tumbler);
@@ -48,7 +48,8 @@ export const SearchForm = ({
                 setTumbler(false);
                 return;
             } else setValue({ text: searchText, short: shortFilter });
-            setTumbler(shortFilter === 'off' ? true : false);
+            setTumbler(shortFilter === 'on' ? true : false);
+            
             return;
         }
         
@@ -91,7 +92,7 @@ export const SearchForm = ({
                         name='short'
                         type='checkbox'
                         value={value.short}
-                        onChange={handleShort}
+                        onChange={handleShortTumbler}
                         checked={tumbler}
                     />
                     <span className='checkbox__icon'></span>

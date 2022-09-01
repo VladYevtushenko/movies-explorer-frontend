@@ -37,12 +37,12 @@ export const MoviesCardList = ({ arrayMovie, type, onClickMovieBtn }) => {
     const useCounter = () => setCounter((...initial) => Number(initial) + moreCard);
 
     useEffect(() => {
-        const setTimeOut = (e) => setTimeout(defineCardAmount(e), 2000);
-        window.addEventListener('resize', (e) => 
-            setTimeOut(e.currentTarget.innerWidth)
+        const setTimeOut = (evt) => setTimeout(defineCardAmount(evt), 2000);
+        window.addEventListener('resize', (evt) => 
+            setTimeOut(evt.currentTarget.innerWidth)
         );
-        return window.removeEventListener('resize', (e) => 
-            setTimeOut(e.currentTarget.innerWidth)
+        return window.removeEventListener('resize', (evt) => 
+            setTimeOut(evt.currentTarget.innerWidth)
         );
     }, []);
 
@@ -60,11 +60,11 @@ export const MoviesCardList = ({ arrayMovie, type, onClickMovieBtn }) => {
                             />
                         );
                     })    
-                    : arrayMovie.map((savedMovie) => {
+                    : arrayMovie.map((movie) => {
                         return (
                             <MoviesCard 
-                                movie={savedMovie}
-                                key={savedMovie._id}
+                                movie={movie}
+                                key={movie._id}
                                 type={type}
                                 onClickMovieBtn={onClickMovieBtn}
                             />

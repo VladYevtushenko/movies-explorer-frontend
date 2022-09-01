@@ -237,9 +237,9 @@ export const App = () => {
     // eslint-disable-next-line react-hooks/exhaustive-deps
     }, []);
 
-    useEffect(() => {
-        setIsAccept(true);
-    }, [navigate]);
+    // useEffect(() => {
+    //     setIsAccept(true);
+    // }, [navigate]);
 
     return (
         <CurrentUserContext.Provider value={currentUser}>
@@ -247,7 +247,13 @@ export const App = () => {
                 {
                     <div className='page'>
                         <Routes>
-                            <Route exact path='/' element={<Main loggedIn={loggedIn} />} />
+                            <Route 
+                                exact path='/' 
+                                element={
+                                    <Main loggedIn={loggedIn} />
+                                } 
+                            />
+
                             <Route 
                                 path='/movies' 
                                 element={
@@ -262,7 +268,7 @@ export const App = () => {
                             />
 
                             <Route 
-                                path='/saved-movies' 
+                                path="/saved-movies" 
                                 element={
                                     <ProtectedRoute loggedIn={loggedIn}>
                                         <SavedMovies 
