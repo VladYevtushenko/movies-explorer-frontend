@@ -28,7 +28,7 @@ export const SearchForm = ({
 
     const handleShortTumbler = () => {
         const valueNew = value.short === 'off' ? 'on' : 'off';
-        setValue((prev) => ({ ...prev, text: valueNew }));
+        setValue((prev) => ({ ...prev, short: valueNew }));
         setTumbler(!tumbler);
         return onClickShortMovieBtn(valueNew);
     };
@@ -48,11 +48,10 @@ export const SearchForm = ({
                 setTumbler(false);
                 return;
             } else setValue({ text: searchText, short: shortFilter });
-            setTumbler(shortFilter === 'on' ? false : true);
+            setTumbler(shortFilter === 'off' ? true : false);
 
             return;
         }
-        
     // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [type]);
 
