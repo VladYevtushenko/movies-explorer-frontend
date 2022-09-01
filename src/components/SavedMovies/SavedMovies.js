@@ -16,14 +16,10 @@ export const SavedMovies = ({
 }) => {
     const currentMovies = useContext(CurrentMoviesSaveContext);
     const [preloaderOn, setPreloaderOn] = useState(false);
-    const [filteredArrayMovies, setFilteredArrayMovies] = useState(currentMovies);
+    const [filteredArrayMovies, setFilteredArrayMovies] = useState(currentMovies); 
     const [searchText, setSearchText] = useState('');
 
-    console.log({currentMovies});
-    console.log({filteredArrayMovies});
-
     const requestList = (searchData) => {
-    console.log({searchData});
         setSearchText(searchData.text.toLowerCase());
         setPreloaderOn(true);
         const arraySearch = filterSavedList(
@@ -31,7 +27,6 @@ export const SavedMovies = ({
             searchData.text.toLowerCase(),
             searchData.short
         );
-        console.log({arraySearch});
         return renderArray(arraySearch);
     };
 
@@ -41,7 +36,7 @@ export const SavedMovies = ({
     };
 
     const renderArray = (array) => {
-        if (array.lenght === 0) {
+        if (array.length === 0) {
             openResultMessage(NOT_FOUND_MESSAGE);
         } else {
             setFilteredArrayMovies(array);
@@ -61,20 +56,18 @@ export const SavedMovies = ({
                 <SearchForm 
                     requestList={requestList}
                     openResultMessage={openResultMessage}
-                    type={'saveMovies'}
+                    type={'savedMovies'}
                     onClickShortMovieBtn={onClickShortMovieBtn}
                 />
                 {preloaderOn ? (
                     <Preloader />
                 ) : ( 
-                    currentMovies.lenght > 0 && (
-                        <>
-                            <MoviesCardList 
-                                arrayMovie={filteredArrayMovies}
-                                type={'save'}
-                                onClickMovieBtn={onClickDeleteMovie}
-                            />
-                        </>
+                    currentMovies.length > 0 && (
+                        <MoviesCardList 
+                            arrayMovie={filteredArrayMovies}
+                            type={'savedMovies'}
+                            onClickMovieBtn={onClickDeleteMovie}
+                        />
                     )
                 )}
             </section>

@@ -40,7 +40,6 @@ export const updateUserData = async (user) => {
             email: user.email,
         }),
     });
-    console.log({res});
     
     return await getResponse(res);
 };
@@ -52,7 +51,6 @@ export const getMovies = async () => {
         headers: headers,
         credentials: 'include',
     });
-    console.log({res});
     
     return await getResponse(res);
 };
@@ -72,8 +70,9 @@ export const addToSavedMovies = async (movie) => {
 
 // remove movie from savedMovies 
 
-export const deleteFromSavedMovies = async (id) => {
-    const res = await fetch(`${MAIN_API_URL}/movies/${id}`,{
+export const deleteFromSavedMovies = async (_id) => {
+    console.log({_id});
+    const res = await fetch(`${MAIN_API_URL}/movies/${_id}`,{
         method: 'DELETE',
         headers: headers,
         credentials: 'include',

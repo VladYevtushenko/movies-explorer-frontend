@@ -3,16 +3,10 @@ import { CurrentMoviesSaveContext } from '../../../../contexts/CurrentMoviesSave
 import './MoviesCard.css';
 
 export const MoviesCard = ({ movie, type, onClickMovieBtn }) => {
-
     const CurrentMoviesSave = useContext(CurrentMoviesSaveContext);
     const { nameRU, duration, image } = movie;
-    const movieData = CurrentMoviesSave.filter((el) => el.movieId === movie.id);
-    const isSave = movieData.lenght >= 0;
-    
-    console.log({CurrentMoviesSave});
-    console.log({movieData});
-    console.log({isSave});
-
+    const movieData = CurrentMoviesSave.filter((element) => element.movieId === movie.id);
+    const isSave = movieData.length > 0;
     
     const transformMins = (minutes) => {
         const hours = Math.trunc(minutes / 60);
@@ -40,20 +34,21 @@ export const MoviesCard = ({ movie, type, onClickMovieBtn }) => {
                 isSave ? (
                     <button 
                         type='button'
-                        className='movie__add-btn movie__add-btn_type_delete' 
+                        // disabled={true}
+                        className='movie__add-btn movie__add-btn_type_saved' 
                         onClick={() => onClickMovieBtn(movie, 'delete', movieData[0]._id)}
                     />
                     ) : (
-                    <button 
-                        type='button' 
-                        className='movie__add-btn movie__add-btn_type_save' 
-                        onClick={() => onClickMovieBtn(movie, 'save', null)}
-                    />
-                    )
+                        <button 
+                            type='button' 
+                            className='movie__add-btn movie__add-btn_type_save' 
+                            onClick={() => onClickMovieBtn(movie, 'save', null)}
+                        />
+                        )
                 ) : (
                     <button 
                         type='button' 
-                        className='movie__add-btn movie__add-btn_type_saved' 
+                        className='movie__add-btn movie__add-btn_type_delete' 
                         onClick={() => onClickMovieBtn(movie._id)}
                     />
                 )}   

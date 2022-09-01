@@ -60,11 +60,11 @@ export const MoviesCardList = ({ arrayMovie, type, onClickMovieBtn }) => {
                             />
                         );
                     })    
-                    : arrayMovie.map((movie) => {
+                    : arrayMovie.map((savedMovie) => {
                         return (
                             <MoviesCard 
-                                movie={movie}
-                                key={movie._id}
+                                movie={savedMovie}
+                                key={savedMovie._id}
                                 type={type}
                                 onClickMovieBtn={onClickMovieBtn}
                             />

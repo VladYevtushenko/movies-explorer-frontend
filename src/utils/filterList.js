@@ -1,4 +1,4 @@
-import { SHORT_MOVIE_LENGHT } from "../consts/consts";
+import { SHORT_MOVIE_LENGTH } from "../consts/consts";
 
 export const filterList = () => {
     const arrayAllMovies = JSON.parse(localStorage.getItem('arrayAllMovies'));
@@ -10,23 +10,19 @@ export const filterList = () => {
     );
     if (shortFilter === 'on') {
         const shortArray = filteredArray.filter(
-            (movie) => movie.duration < SHORT_MOVIE_LENGHT
+            (movie) => movie.duration < SHORT_MOVIE_LENGTH
         );
         return shortArray;
     } else return filteredArray;
 };
 
 export const filterSavedList = (array, searchText, short) => {
-    console.log({array});
-    console.log({searchText});
-    console.log({short});
     const filteredArray = array.filter(
-        (movie) => movie.nameRu.indexOf(searchText) >= 0
+        (movie) => movie.nameRU.indexOf(searchText) >= 0
     );
-    console.log({filteredArray});
     if (short === 'on') {
         const shortArray = filteredArray.filter(
-            (movie) => movie.duration < SHORT_MOVIE_LENGHT
+            (movie) => movie.duration < SHORT_MOVIE_LENGTH
         );
         return shortArray;
     } else return filteredArray;

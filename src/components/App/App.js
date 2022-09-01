@@ -1,4 +1,3 @@
-/* eslint-disable no-unused-vars */
 import React, { useEffect, useState } from 'react';
 import { Route, Routes, Navigate, useNavigate } from "react-router-dom";
 import { ProtectedRoute } from '../../utils/ProtectedRoute';
@@ -51,31 +50,6 @@ export const App = () => {
 
     let messageClean;
 
-    // check token
-
-    useEffect(() => {
-        checkToken();
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-    }, []);
-
-    const checkToken = () => {
-		if (localStorage.getItem('jwt')) {
-			const token = localStorage.getItem('jwt')
-			getContent(token)
-				.then((res) => {
-					if (res) {
-						setLoggedIn(true);
-						setCurrentUser({
-                            email: res.email,
-                            name: res.name
-                        });
-                        navigate('/movies');
-					}
-				})
-				.catch((err) => console.log(err));
-		}
-	}
-
     //regestration
 
     const signUp = async (userData) => {
@@ -105,7 +79,7 @@ export const App = () => {
         messageClean = setTimeout(() => {
             setIsAccept(true);
             setResultMessage('');
-        }, 5000);
+        }, 3000);
         
     };
 
@@ -146,11 +120,7 @@ export const App = () => {
     // profile editing
 
     const onClickUpdateProfile = async (userDataNew) => {
-        console.log({userDataNew});
-        
         const res = await updateUserData(userDataNew);
-        console.log({res});
-        
         if (res.email || res.name) {
             setIsAccept(false);
             setResultMessage(ACCAUNT_EDIT_SUCCES)
@@ -182,26 +152,14 @@ export const App = () => {
         setCurrentMovies([]);
     };
 
-    // remove movie from savedMovie
-
-    const onClickDeleteMovie = async (id) => {
-        const res = await deleteFromSavedMovies(id);
-        if (res.message === MOVIE_DEL_MESSAGE) {
-            setCurrentMovies((prev) => prev.filter((element) => element._id !== id));
-        } else {
-            setIsAccept(false);
-            setResultMessage(SERVER_ERROR);
-        }
-    };
-
     // add movie to savedMovies by id
 
-    const onClickSaveMovie = async (movie) => {
-        console.log({movie});
-        if (movie.status === 'delete') {
-            onClickDeleteMovie(movie.id);
+    const onClickSaveMovie = async (movie, status, id) => {
+        if (status === 'delete') {
+            onClickDeleteMovie(id);
             return;
         }
+
         const movieNew = {
             ...movie,
             image: `https://api.nomoreparties.co${movie.image.url}`,
@@ -214,8 +172,9 @@ export const App = () => {
         delete movieNew.created_at;
         delete movieNew.updated_at;
         const res = await addToSavedMovies(movieNew);
-
-        if (res) {
+        console.log({res});
+        
+        if (res._id) {
             setCurrentMovies((prev) => [...prev, res]);
         }   else if (res.message === BAD_REQUEST) {
             setResultMessage(SAVE_ERROR_MESSAGE);
@@ -223,6 +182,22 @@ export const App = () => {
         } else {
             setResultMessage(SERVER_ERROR);
             setMessageBanner(true);
+        }
+    };
+
+    // remove movie from savedMovie
+
+    const onClickDeleteMovie = async (id) => {
+        console.log({id});
+        
+        const res = await deleteFromSavedMovies(id);
+        console.log({res});
+        
+        if (res.message === MOVIE_DEL_MESSAGE) {
+            setCurrentMovies((prev) => prev.filter((element) => element._id !== id));
+        } else {
+            setIsAccept(false);
+            setResultMessage(SERVER_ERROR);
         }
     };
 
@@ -236,9 +211,35 @@ export const App = () => {
         setMessageBanner(true);
     };
 
-    // useEffect(() => {
-    //     setIsAccept(true);
-    // }, [navigate]);
+    // token check
+
+    const checkToken = () => {
+			const token = localStorage.getItem('jwt')
+			if (!token) {
+                return false;
+            }
+            return getContent();
+	};
+
+    useEffect(() => {
+        (async () => {
+            const res = await checkToken();
+            if (res) {
+                setLoggedIn(true);
+                setCurrentUser(res);
+                const movies = await getMovies(); 
+                setCurrentMovies(movies);                
+            } else { 
+                setLoggedIn(false); 
+            }
+        })();
+        return clearTimeout(messageClean);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, []);
+
+    useEffect(() => {
+        setIsAccept(true);
+    }, [navigate]);
 
     return (
         <CurrentUserContext.Provider value={currentUser}>
@@ -266,7 +267,7 @@ export const App = () => {
                                     <ProtectedRoute loggedIn={loggedIn}>
                                         <SavedMovies 
                                             loggedIn={loggedIn}
-                                            currentMovies={setCurrentMovies}
+                                            currentMovies={currentMovies}
                                             openResultMessage={openResultMessage}
                                             onClickDeleteMovie={onClickDeleteMovie}
                                         />

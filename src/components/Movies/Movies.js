@@ -17,7 +17,6 @@ export const Movies = ({ loggedIn, onClickSaveMovie, openResultMessage }) => {
     const requestList = async (searchData) => {
         setPreloaderOn(true);
         const arrayAllMovies = localStorage.getItem('arrayAllMovies');
-
         if (!arrayAllMovies) {
             const allMovies = await getMovies();            
             if (allMovies) {
@@ -25,10 +24,7 @@ export const Movies = ({ loggedIn, onClickSaveMovie, openResultMessage }) => {
             } else {
                 openResultMessage(SERVER_ERROR_SEARCH);
             }
-            console.log({allMovies});
-            
         }
-
         localStorage.setItem('searchText', searchData.text.toLowerCase());
         localStorage.setItem('shortFilter', searchData.short);
         const arraySearch = filterList();
@@ -37,24 +33,21 @@ export const Movies = ({ loggedIn, onClickSaveMovie, openResultMessage }) => {
         return renderMoviesList(arraySearch);
     };
 
-    const renderMoviesList = (array) => {
-        console.log({array});
-        if (array.length === 0) {
-            openResultMessage(NOT_FOUND_MESSAGE);
-        } else { 
-            setFilteredArrayMovies(array);
-            console.log({setFilteredArrayMovies});
-            
-        }
-        setIsRender(true);
-        return setPreloaderOn(false);
-    }; 
-
     const onClickShortMovieBtn = (searchData) => {
         localStorage.setItem('shortFilter', searchData);
         const arraySearch = filterList();
         return renderMoviesList(arraySearch);
     };
+
+    const renderMoviesList = (array) => {
+        if (array.length === 0) {
+            openResultMessage(NOT_FOUND_MESSAGE);
+        } else { 
+            setFilteredArrayMovies(array);
+        }
+        setIsRender(true);
+        return setPreloaderOn(false);
+    }; 
 
     useEffect(() => {
         const arrayAllMovies = localStorage.getItem('arrayAllMovies');
@@ -64,10 +57,10 @@ export const Movies = ({ loggedIn, onClickSaveMovie, openResultMessage }) => {
             return;
         }
         const arraySearch = filterList();
-        console.log({arraySearch});
-        
         setIsRender(true);
         renderMoviesList(arraySearch);
+        console.log({arraySearch});
+        
     // eslint-disable-next-line react-hooks/exhaustive-deps
     }, []);
 
