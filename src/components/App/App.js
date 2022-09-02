@@ -16,6 +16,7 @@ import {
     register,
     authorize,
     getContent,
+    logOut,
 } from '../../utils/auth';
 import { 
     getMovies,
@@ -89,13 +90,11 @@ export const App = () => {
     const onLogin = async (userData) => {
         setResultMessage('');
         setIsAccept(false);
-
         const userDataAuth = {
             email: userData.email,
             password: userData.password
         };
         const res = await authorize(userDataAuth);
-
         if (res.token) {
             localStorage.setItem('jwt', res.token);
             setLoggedIn(true);
@@ -144,6 +143,7 @@ export const App = () => {
     // account signOut
 
     const signOut = () => {
+        logOut();
         localStorage.removeItem('jwt');
         localStorage.removeItem('arrayAllMovies');
         localStorage.removeItem('searchText');
@@ -167,13 +167,11 @@ export const App = () => {
             thumbnail: `https://api.nomoreparties.co${movie.image.formats.thumbnail.url}`,
             movieId: movie.id,
         };
-        // console.log({movieNew});
         
         delete movieNew.id;
         delete movieNew.created_at;
         delete movieNew.updated_at;
         const res = await addToSavedMovies(movieNew);
-        console.log({res});
         
         if (res._id) {
             setCurrentMovies((prev) => [...prev, res]);
@@ -211,23 +209,17 @@ export const App = () => {
     // token check
 
     const checkToken = () => {
-            
 			const token = localStorage.getItem('jwt')
-            console.log({token});
-            
 			if (!token) {
                 return false;
             }
             return getContent();
-            
 	};
 
     useEffect(() => {
         (async () => {
             const res = await checkToken();
             const path = location.pathname;
-            console.log({res});
-            
             if (res) {
                 setLoggedIn(true);
                 setCurrentUser(res);
@@ -242,9 +234,9 @@ export const App = () => {
     // eslint-disable-next-line react-hooks/exhaustive-deps
     }, []);
 
-    // useEffect(() => {
-    //     setIsAccept(true);
-    // }, [navigate]);
+    useEffect(() => {
+        setIsAccept(true);
+    }, [navigate]);
 
     return (
         <CurrentUserContext.Provider value={currentUser}>

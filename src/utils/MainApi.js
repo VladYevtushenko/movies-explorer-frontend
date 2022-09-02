@@ -29,8 +29,6 @@ export const getUserInfo = async () => {
 // user profile editing
 
 export const updateUserData = async (user) => {
-    console.log({user});
-    
     const res = await fetch(`${MAIN_API_URL}/users/me`, {
         method: 'PATCH',
         headers: headers,
@@ -58,7 +56,6 @@ export const getMovies = async () => {
 // add movie to savedMovies
 
 export const addToSavedMovies = async (movie) => {
-    console.log({movie});
     const res = await fetch(`${MAIN_API_URL}/movies`, {
         method: 'POST',
         headers: headers,
@@ -71,7 +68,6 @@ export const addToSavedMovies = async (movie) => {
 // remove movie from savedMovies 
 
 export const deleteFromSavedMovies = async (_id) => {
-    console.log({_id});
     const res = await fetch(`${MAIN_API_URL}/movies/${_id}`,{
         method: 'DELETE',
         headers: headers,
