@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { Route, Routes, Navigate, useNavigate } from "react-router-dom";
+import { Route, Routes, Navigate, useNavigate, useLocation} from "react-router-dom";
 import { ProtectedRoute } from '../../utils/ProtectedRoute';
 import './App.css';
 import { Main } from '../Main/Main';
@@ -41,6 +41,7 @@ import {
 
 export const App = () => {
     const navigate = useNavigate();
+    const location = useLocation();
     const [currentUser, setCurrentUser] = useState({});
     const [currentMovies, setCurrentMovies] = useState([]);
     const [resultMessage, setResultMessage] = useState('');
@@ -210,21 +211,29 @@ export const App = () => {
     // token check
 
     const checkToken = () => {
+            
 			const token = localStorage.getItem('jwt')
+            console.log({token});
+            
 			if (!token) {
                 return false;
             }
             return getContent();
+            
 	};
 
     useEffect(() => {
         (async () => {
             const res = await checkToken();
+            const path = location.pathname;
+            console.log({res});
+            
             if (res) {
                 setLoggedIn(true);
                 setCurrentUser(res);
                 const movies = await getMovies(); 
-                setCurrentMovies(movies);                
+                setCurrentMovies(movies);    
+                navigate(path);            
             } else { 
                 setLoggedIn(false); 
             }
