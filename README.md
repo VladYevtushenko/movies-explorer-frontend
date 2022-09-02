@@ -11,7 +11,7 @@ Used technologies:
 
 ---
 
-URL address for functional API: https://movieshelf.by.vladevt.nomoredomains.xyz
+URL address for functional page: https://movieshelf.by.vladevt.nomoredomains.xyz
 
 ___
 
