@@ -8,7 +8,7 @@ import { AuthInput } from '../AuthInput/AuthInput';
 import { AuthCaption } from '../AuthCaption/AuthCaption';
 import classNames from 'classnames';
 
-export const Register = ({ resultMessage, isAccept, signUp }) => {
+export const Register = ({ resultMessage, isAllowed, signUp }) => {
     const type = 'signup';
     const [messageError, setMessageError] = useState({
         name: '',
@@ -25,7 +25,7 @@ export const Register = ({ resultMessage, isAccept, signUp }) => {
 
     const classSaveButton = classNames(`button`, {
         button_disabled: !isValid,
-        'button_disabled button__span': !isAccept,
+        'button_disabled button__span': !isAllowed,
     });
 
     const handleChange = (e) => {
@@ -65,7 +65,7 @@ export const Register = ({ resultMessage, isAccept, signUp }) => {
             <AuthLogo />
             <AuthTitle titleText="Добро пожаловать!" />
             <AuthBox>
-                <AuthForm type={type} name='signup' isAccept={isAccept} onSubmit={signUp}>
+                <AuthForm type={type} name='signup' isAllowed={isAllowed} onSubmit={signUp}>
                     <AuthInput 
                         lableText='Имя' 
                         type='text'
@@ -97,7 +97,7 @@ export const Register = ({ resultMessage, isAccept, signUp }) => {
                         onChange={handleChange}
                         messageError={messageError.password}
                     />
-                    {!isAccept && <p className='form__error'>{ resultMessage }</p>}
+                    {!isAllowed && <p className='form__error'>{ resultMessage }</p>}
                     <button 
                         type='button'
                         className={classSaveButton}

@@ -10,7 +10,7 @@ export const Profile = ({
     signOut,
     onClickUpdateProfile,
     resultMessage,
-    isAccept,
+    isAllowed,
     loggedIn
 }) => {
     const currentUser = useContext(CurrentUserContext);
@@ -22,7 +22,7 @@ export const Profile = ({
 
     const classSaveButton = classNames(`profile__button`, {
         'profile__button_disabled': !isValid,
-        'profile__button_disabled profile__button_span': !isAccept,
+        'profile__button_disabled profile__button_span': !isAllowed,
 
     });
 
@@ -114,7 +114,7 @@ export const Profile = ({
                             {messageError.email}
                         </span>
                     )}
-                    {!isAccept && <span className='profile__error'>{resultMessage}</span>}
+                    {!isAllowed && <span className='profile__error'>{resultMessage}</span>}
                     {edit ? (
                         <button 
                             className={classSaveButton}

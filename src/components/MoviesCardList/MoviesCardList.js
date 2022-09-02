@@ -34,7 +34,7 @@ export const MoviesCardList = ({ arrayMovie, type, onClickMovieBtn }) => {
         defineCardAmount(viewWidth);
     }, []);
 
-    const useCounter = () => setCounter((...initial) => Number(initial) + moreCard);
+    const useCounter = () => setCounter((...prev) => Number(prev) + moreCard);
 
     useEffect(() => {
         const setTimeOut = (evt) => setTimeout(defineCardAmount(evt), 2000);

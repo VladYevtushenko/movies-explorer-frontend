@@ -47,7 +47,7 @@ export const App = () => {
     const [currentMovies, setCurrentMovies] = useState([]);
     const [resultMessage, setResultMessage] = useState('');
     const [loggedIn, setLoggedIn] = useState(false);
-    const [isAccept, setIsAccept] = useState(true);
+    const [isAllowed, setIsAllowed] = useState(true);
     const [isMessageBannerOpen, setMessageBanner] = useState(false);
 
     let messageClean;
@@ -56,30 +56,30 @@ export const App = () => {
 
     const signUp = async (userData) => {
         setResultMessage('');
-        setIsAccept(false);
+        setIsAllowed(false);
     
         const res = await register(userData);
         if (res.message === CONFLICT_STATUS) {
             setResultMessage(CONFLICT_ERROR);
             messageClean = setTimeout(() => {
-                setIsAccept(false);
+                setIsAllowed(false);
                 setResultMessage('');
             }, 3000);
         } else if (res.data._id) {
-                setIsAccept(true);
+                setIsAllowed(true);
                 setResultMessage(SUCCESS_REG_MESSAGE);
-                setIsAccept(false);
+                setIsAllowed(false);
                 messageClean = setTimeout(() => {
-                    setIsAccept(true);
+                    setIsAllowed(true);
                     setResultMessage('');
                 }, 3000);
                 return onLogin(userData);
             } else {
             setResultMessage(SERVER_ERROR);
         }
-        setIsAccept(false);
+        setIsAllowed(false);
         messageClean = setTimeout(() => {
-            setIsAccept(true);
+            setIsAllowed(true);
             setResultMessage('');
         }, 3000);
         
@@ -89,7 +89,7 @@ export const App = () => {
 
     const onLogin = async (userData) => {
         setResultMessage('');
-        setIsAccept(false);
+        setIsAllowed(false);
         const userDataAuth = {
             email: userData.email,
             password: userData.password
@@ -106,13 +106,13 @@ export const App = () => {
         } else 
         if (res.message === UNAUTHORIZED_ERROR) {
             setResultMessage(EMAIL_PASSWORD_ERROR);
-            setIsAccept(false);
+            setIsAllowed(false);
         } else {
             setResultMessage(SERVER_ERROR);
-            setIsAccept(false);
+            setIsAllowed(false);
         }
         messageClean = setTimeout(() => {
-            setIsAccept(true);
+            setIsAllowed(true);
             setResultMessage('');
         }, 3000);
     };
@@ -122,20 +122,20 @@ export const App = () => {
     const onClickUpdateProfile = async (userDataNew) => {
         const res = await updateUserData(userDataNew);
         if (res.email || res.name) {
-            setIsAccept(false);
+            setIsAllowed(false);
             setResultMessage(ACCAUNT_EDIT_SUCCES)
             setCurrentUser(userDataNew);
         } 
         else if (res.message === CONFLICT_STATUS) {
-            setIsAccept(false);
+            setIsAllowed(false);
             setResultMessage(CONFLICT_ERROR);
         } 
         else {
-            setIsAccept(false);
+            setIsAllowed(false);
             setResultMessage(SERVER_ERROR);
         }
         messageClean = setTimeout(() => {
-            setIsAccept(true);
+            setIsAllowed(true);
             setResultMessage('');
         }, 3000);
     };
@@ -191,7 +191,7 @@ export const App = () => {
         if (res.message === MOVIE_DEL_MESSAGE) {
             setCurrentMovies((prev) => prev.filter((element) => element._id !== id));
         } else {
-            setIsAccept(false);
+            setIsAllowed(false);
             setResultMessage(SERVER_ERROR);
         }
     };
@@ -235,7 +235,7 @@ export const App = () => {
     }, []);
 
     useEffect(() => {
-        setIsAccept(true);
+        setIsAllowed(true);
     }, [navigate]);
 
     return (
@@ -286,7 +286,7 @@ export const App = () => {
                                             loggedIn={loggedIn}
                                             signOut={signOut}
                                             resultMessage={resultMessage}
-                                            isAccept={isAccept}
+                                            isAllowed={isAllowed}
                                             onClickUpdateProfile={onClickUpdateProfile}
                                         />
                                     </ProtectedRoute>
@@ -302,7 +302,7 @@ export const App = () => {
                                         <Login 
                                             onLogin={onLogin}
                                             resultMessage={resultMessage}
-                                            isAccept={isAccept}
+                                            isAllowed={isAllowed}
                                         />
                                     )
                                 } 
@@ -317,7 +317,7 @@ export const App = () => {
                                         <Register 
                                             signUp={signUp}
                                             resultMessage={resultMessage}
-                                            isAccept={isAccept}
+                                            isAllowed={isAllowed}
                                         />
                                     )
                                 } 
@@ -328,7 +328,7 @@ export const App = () => {
                             isOpen={isMessageBannerOpen}
                             onClose={closeResultMessage}
                             resultMessage={resultMessage}
-                            isAccept={isAccept}
+                            isAllowed={isAllowed}
                         />
                     </div>
                 }

@@ -30,7 +30,7 @@ export const SearchForm = ({
         const valueNew = value.short === 'off' ? 'on' : 'off';
         setValue((prev) => ({ ...prev, short: valueNew }));
         setTumbler(!tumbler);
-        return onClickShortMovieBtn(valueNew);
+        return onClickShortMovieBtn(valueNew);        
     };
 
     const onClickMovieSearchBtn = () => {
