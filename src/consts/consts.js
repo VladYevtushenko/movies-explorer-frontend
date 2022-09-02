@@ -1,6 +1,6 @@
 // api urls
 
-export const MAIN_API_URL = 'http://https://api.movieshelf.by.vladevt.nomoredomains.xyz';
+export const MAIN_API_URL = 'https://api.movieshelf.by.vladevt.nomoredomains.xyz';
 
 export const MOVIE_API_URL = 'https://api.nomoreparties.co/beatfilm-movies';
 
