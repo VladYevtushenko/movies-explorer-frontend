@@ -15,4 +15,4 @@ URL address for functional API: https://movieshelf.by.vladevt.nomoredomains.xyz
 
 ___
 
-Link to pull request:
+Link to pull request: https://github.com/VladYevtushenko/movies-explorer-frontend/pull/2
