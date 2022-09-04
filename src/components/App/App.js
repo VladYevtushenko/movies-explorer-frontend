@@ -19,6 +19,7 @@ import {
     logOut,
 } from '../../utils/auth';
 import { 
+    headers,
     getMovies,
     getUserInfo,
     addToSavedMovies,
@@ -96,7 +97,8 @@ export const App = () => {
         };
         const res = await authorize(userDataAuth);
         if (res.token) {
-            localStorage.setItem('jwt', res.token);
+            localStorage.setItem('jwt', res.token)
+            headers.Authorization = `Bearer ${localStorage.getItem('token')}`
             setLoggedIn(true);
             const user = await getUserInfo();
             const movies = await getMovies();
@@ -121,14 +123,14 @@ export const App = () => {
 
     const onClickUpdateProfile = async (userDataNew) => {
         const res = await updateUserData(userDataNew);
-        if (res.email || res.name) {
+        if (res.message === CONFLICT_STATUS) {
+            setIsAllowed(false);
+            setResultMessage(CONFLICT_ERROR);
+        }
+        else if (res.email || res.name) {
             setIsAllowed(false);
             setResultMessage(ACCAUNT_EDIT_SUCCES)
             setCurrentUser(userDataNew);
-        } 
-        else if (res.message === CONFLICT_STATUS) {
-            setIsAllowed(false);
-            setResultMessage(CONFLICT_ERROR);
         } 
         else {
             setIsAllowed(false);

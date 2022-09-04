@@ -25,6 +25,12 @@ export const authorize = async ({ email, password }) => {
         body: JSON.stringify({email, password}),
         credentials: 'include',
     })
+        // .then((data) => {
+        //     if (data.token) {
+        //         localStorage.setItem('jwt', data.token);
+        //         return data;
+        //     }
+        // })
     return await getResponse(res);
 }
 
@@ -33,7 +39,10 @@ export const authorize = async ({ email, password }) => {
 export const getContent = async (token) => {
     const res = await fetch(`${MAIN_API_URL}/users/me`, {
         method: 'GET',
-        headers: headers,
+        headers: {
+            'Content-type': 'application/json',
+            'Authorization': `Bearer ${token}`
+        },
         credentials: 'include',
     });
     

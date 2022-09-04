@@ -2,6 +2,7 @@ import { MAIN_API_URL } from "../consts/consts";
 
 export const headers = {
     'Content-Type': 'application/json',
+    Authorization: `Bearer ${localStorage.getItem('token')}`
 };
 
 export const getResponse = (res) => {
