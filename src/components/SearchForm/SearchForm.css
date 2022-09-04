@@ -117,7 +117,7 @@
     display: inline-block;
     width: 33px;
     height: 14px;
-    background-image: url(../../images/smalltumb_active.svg);
+    background-image: url(../../images/tumbtumbler-dis.svg);
     background-repeat: no-repeat;
     background-position: center;
     background-size: cover;
@@ -129,7 +129,7 @@
 }
 
 .checkbox:checked + .checkbox__icon {
-    background-image: url(../../images/tumbtumbler-dis.svg);
+    background-image: url(../../images/smalltumb_active.svg);
     border-radius: 100px;
     height: 15px;
     width: 33px;

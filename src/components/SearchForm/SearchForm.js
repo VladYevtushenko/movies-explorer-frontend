@@ -48,7 +48,7 @@ export const SearchForm = ({
                 setTumbler(false);
                 return;
             } else setValue({ text: searchText, short: shortFilter });
-            setTumbler(shortFilter === 'off' ? true : false);
+            setTumbler(shortFilter === 'on' ? true : false);
 
             return;
         }

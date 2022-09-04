@@ -32,7 +32,6 @@ export const Login = ({ resultMessage, isAllowed, onLogin }) => {
     };
 
     const login = (e) => {
-        e.preventDefault();
         if (type === 'signin' && (!userData.password || !userData.email)) {
             return;
         } else {
@@ -70,6 +69,8 @@ export const Login = ({ resultMessage, isAllowed, onLogin }) => {
                         onChange={handleChange}
                         value={userData.email}
                         messageError={messageError.email}
+                        pattern='^[^ ]+@[^ ]+\.[a-z]{2,3}$'
+        
                     />
                     <AuthInput 
                         lableText='Password' 

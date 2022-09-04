@@ -46,4 +46,3 @@ export const VP_WIDTH_420 = 420;
 // short movie lenght
 
 export const SHORT_MOVIE_LENGTH = 40;
-

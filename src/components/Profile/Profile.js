@@ -107,6 +107,7 @@ export const Profile = ({
                             onChange={handleChange}
                             disabled={!edit}
                             title='email'
+                            pattern='^[^ ]+@[^ ]+\.[a-z]{2,3}$'
                         />
                     </fieldset>
                     {messageError.email && (

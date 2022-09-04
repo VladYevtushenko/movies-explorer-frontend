@@ -86,6 +86,7 @@ export const Register = ({ resultMessage, isAllowed, signUp }) => {
                         onChange={handleChange}
                         value={userData.email}
                         messageError={messageError.email}
+                        pattern='^[^ ]+@[^ ]+\.[a-z]{2,3}$'
                     />
                     <AuthInput 
                         lableText='Password'

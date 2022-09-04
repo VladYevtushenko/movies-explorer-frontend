@@ -22,11 +22,15 @@ export const SavedMovies = ({
     const requestList = (searchData) => {
         setSearchText(searchData.text.toLowerCase());
         setPreloaderOn(true);
+        console.log({currentMovies});
+        
         const arraySearch = filterSavedList(
             currentMovies,
             searchData.text.toLowerCase(),
             searchData.short
         );
+        console.log({arraySearch});
+        
         return renderArray(arraySearch);
     };
 
@@ -36,6 +40,8 @@ export const SavedMovies = ({
     };
 
     const renderArray = (array) => {
+        console.log({array});
+        
         if (array.length === 0) {
             openResultMessage(NOT_FOUND_MESSAGE);
         } else {

@@ -72,6 +72,21 @@
     text-align: center;
 }
 
+.profile__button:hover {
+    opacity: .8;
+    transition: .2s;
+}
+
+.profile__button_disabled {
+    cursor: default;
+    pointer-events: none;
+    opacity: .5;
+}
+
+.profile__button_span{
+    margin-top: 20px;
+}
+
 .profile__error {
     color: #ff004c;
     font-weight: 400;
@@ -79,20 +94,6 @@
     line-height: 13px;
     margin-top: 189px;
     cursor: default;
-}
-
-.profile__button_disabled {
-    cursor: default;
-    pointer-events: none;
-}
-
-.profile__button_span{
-    margin-top: 20px;
-}
-
-.profile__button:hover {
-    opacity: .8;
-    transition: .2s;
 }
 
 .profile__logout {
