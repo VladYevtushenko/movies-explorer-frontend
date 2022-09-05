@@ -73,7 +73,7 @@ export const SearchForm = ({
                         placeholder={`Фильм`}
                         onChange={handleChange}
                         name='text'
-                        vlaue={value.text}
+                        value={value.text}
                         required
                         form='search'
                     />

@@ -19,7 +19,6 @@ import {
     logOut,
 } from '../../utils/auth';
 import { 
-    headers,
     getMovies,
     getUserInfo,
     addToSavedMovies,
@@ -98,7 +97,6 @@ export const App = () => {
         const res = await authorize(userDataAuth);
         if (res.token) {
             localStorage.setItem('jwt', res.token)
-            headers.Authorization = `Bearer ${localStorage.getItem('token')}`
             setLoggedIn(true);
             const user = await getUserInfo();
             const movies = await getMovies();

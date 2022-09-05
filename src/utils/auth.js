@@ -25,12 +25,6 @@ export const authorize = async ({ email, password }) => {
         body: JSON.stringify({email, password}),
         credentials: 'include',
     })
-        // .then((data) => {
-        //     if (data.token) {
-        //         localStorage.setItem('jwt', data.token);
-        //         return data;
-        //     }
-        // })
     return await getResponse(res);
 }
 

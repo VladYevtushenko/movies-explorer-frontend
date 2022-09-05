@@ -56,18 +56,6 @@
     color: #EE3465;
 }
 
-.search-form__input:focus:active {
-    outline: none;
-    border: none;
-    background-color: #222222;
-    outline-offset: 0;
-    font-family: 'Inter', Arial, sans-serif;;
-    font-weight: 400;
-    font-size: 18px;
-    line-height: 20px;
-    color: #8B8B8B;
-}
-
 .search-form__btn {
     background-image: url(../../images/find.svg);
     width: 80px;
