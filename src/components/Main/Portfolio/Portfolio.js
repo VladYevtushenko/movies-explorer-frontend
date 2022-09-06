@@ -6,19 +6,34 @@ export const Portfolio = () => {
             <h2 className='portfolio__title'>Портфолио</h2>
             <ul className='portfolio__list'>
                 <li className='portfolio__list-item portfolio__list-item_bordered'>
-                    <a className='portfolio__link' href='https://vladyevtushenko.github.io/how-to-learn/' target='blank'>
+                    <a 
+                        className='portfolio__link' 
+                        href='https://vladyevtushenko.github.io/how-to-learn/' 
+                        target='_blank'
+                        rel="noreferrer noopener"
+                    >
                         <p className='portfolio__link-name'>Статичный сайт</p>
                         <p className='portfolio__icon'>↗</p>
                     </a>
                 </li>
                 <li className='portfolio__list-item portfolio__list-item_bordered'>
-                    <a className='portfolio__link' href='https://vladyevtushenko.github.io/russian-travel/index.html' target='blank'>
+                    <a 
+                        className='portfolio__link' 
+                        href='https://vladyevtushenko.github.io/russian-travel/index.html' 
+                        target='_blank'
+                        rel="noreferrer noopener"
+                    >
                         <p className='portfolio__link-name'>Адаптивный сайт</p>
                         <p className='portfolio__icon'>↗</p>
                     </a>
                 </li>
                 <li className='portfolio__list-item'>
-                    <a className='portfolio__link' href='https://mesto.by.vlad.nomorepartiesxyz.ru' target='blank'>
+                    <a 
+                        className='portfolio__link' 
+                        href='https://mesto.by.vlad.nomorepartiesxyz.ru' 
+                        target='_blank'
+                        rel="noreferrer noopener"
+                    >
                         <p className='portfolio__link-name'>Одностраничное приложение</p>
                         <p className='portfolio__icon'>↗</p>
                     </a>

@@ -22,6 +22,7 @@
     display: flex;
     justify-content: space-between;
     flex-wrap: wrap;
+    border: none;
     border-bottom: 1px solid #424242;
     font-style: normal;
     font-size: 11px;
@@ -55,7 +56,8 @@
     outline: none;
 }
 
-.profile__edit-btn {
+.profile__button {
+    margin: 0;
     margin-top: 220px;
     font-style: normal;
     font-weight: 400;
@@ -66,11 +68,32 @@
     border: none;
     transition: .2s;
     cursor: pointer;
+    width: 100%;
+    text-align: center;
 }
 
-.profile__edit-btn:hover {
+.profile__button:hover {
     opacity: .8;
     transition: .2s;
+}
+
+.profile__button_disabled {
+    cursor: default;
+    pointer-events: none;
+    opacity: .5;
+}
+
+.profile__button_span{
+    margin-top: 20px;
+}
+
+.profile__error {
+    color: #ff004c;
+    font-weight: 400;
+    font-size: 11px;
+    line-height: 13px;
+    margin-top: 189px;
+    cursor: default;
 }
 
 .profile__logout {
@@ -101,7 +124,7 @@
 }
 
 @media screen and (max-width: 770px) {
-    .profile__edit-btn {
+    .profile__button {
         margin-top: 210px;
     }
 }
@@ -116,7 +139,7 @@
         margin-top: 80px;
     }
 
-    .profile__edit-btn {
+    .profile__button {
         margin-top: 379px;
         font-size: 12px;
         line-height: 15px; 

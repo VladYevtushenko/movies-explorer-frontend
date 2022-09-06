@@ -14,7 +14,8 @@ export const Footer = () => {
                             <a 
                                 className='footer__link' 
                                 href='https://practicum.yandex.ru/' 
-                                target='blank'
+                                target='_blank'
+                                rel="noreferrer noopener"
                             >
                                 Яндекс.Практикум
                             </a>
@@ -23,7 +24,8 @@ export const Footer = () => {
                             <a 
                                 className='footer__link' 
                                 href='https://github.com/yandex-praktikum' 
-                                target='blank'
+                                target='_blank'
+                                rel="noreferrer noopener"
                             >
                                 Github
                             </a>
@@ -32,7 +34,8 @@ export const Footer = () => {
                             <a 
                                 className='footer__link' 
                                 href='https://www.facebook.com/yandex.practicum/' 
-                                target='blank'
+                                target='_blank'
+                                rel="noreferrer noopener"
                             >
                                 Facebook
                             </a>

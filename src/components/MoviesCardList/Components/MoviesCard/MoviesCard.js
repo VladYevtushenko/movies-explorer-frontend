@@ -1,52 +1,63 @@
-import React, { useState } from 'react';
-import { useLocation } from 'react-router-dom';
+import React, { useContext } from 'react';
+import { CurrentMoviesSaveContext } from '../../../../contexts/CurrentMoviesSaveContext';
 import './MoviesCard.css';
-import testPic from '../../../../images/test_pic.png';
 
-export const MoviesCard = () => {
-    const location = useLocation();
-    const [added, setAdded] = useState();
-
-    const handleAdd = () => {
-        setAdded(!added);
+export const MoviesCard = ({ movie, type, onClickMovieBtn }) => {
+    const CurrentMoviesSave = useContext(CurrentMoviesSaveContext);
+    const { nameRU, duration, image } = movie;
+    const movieData = CurrentMoviesSave.filter((element) => element.movieId === movie.id);
+    const isSave = movieData.length > 0;
+    
+    const transformMins = (minutes) => {
+        const hours = Math.trunc(minutes / 60);
+        const mins = minutes % 60;
+        return hours > 0 ? `${hours}ч ${mins}м` : `${mins}м`;
     };
 
-    const handleRemove = () => {
-        setAdded(false);
-    };
+    const movieLength = transformMins(duration);
+    const moviePoster = type === 'all' ? `https://api.nomoreparties.co${image.url}` : movie.image;
 
     return (
         <li className='movie'>
             <a 
                 className='trailer__link'
-                href='https://www.youtube.com/watch?v=iudeJyaOxss&ab_channel=%D0%9E%D0%BD%D0%BB%D0%B0%D0%B9%D0%BD-%D1%88%D0%BA%D0%BE%D0%BB%D0%B0%D0%B4%D0%B8%D0%B7%D0%B0%D0%B9%D0%BD%D0%B0BBE'
-                target='blank'
+                href={movie.trailerLink}
+                target='_blank'
+                rel="noreferrer noopener"
             >
                 <img 
                     className='movie__poster'
-                    src={testPic}
-                    alt='movie-poster'
+                    src={moviePoster}
+                    alt={nameRU}
                 />
             </a>
-            {location.pathname !== '/saved-movies' 
-                ? (<button 
-                    type='button'
-                    onClick={handleAdd}
-                    className={`movie__add-btn movie__add-btn_type_save 
-                        ${added ? 'movie__add-btn_type_saved' : ''}`}
-                    />)
-                    : (<button 
+            {type === 'all' ? (
+                isSave ? (
+                    <button 
+                        type='button'
+                        className='movie__add-btn movie__add-btn_type_saved' 
+                        onClick={() => onClickMovieBtn(movie, 'delete', movieData[0]._id)}
+                    />
+                    ) : (
+                        <button 
+                            type='button' 
+                            className='movie__add-btn movie__add-btn_type_save' 
+                            onClick={() => onClickMovieBtn(movie, 'save', null)}
+                        />
+                        )
+                ) : (
+                    <button 
                         type='button' 
                         className='movie__add-btn movie__add-btn_type_delete' 
-                        aria-label='delete'
-                        onClick={handleRemove}
-                    />)}
+                        onClick={() => onClickMovieBtn(movie._id)}
+                    />
+                )}   
                 
             <div className='movie__info'>
                 <figcaption className='movie__name'>
-                    33 слова о дизайне
+                    {nameRU}
                 </figcaption>
-                <p className='movie__duration'>1ч 17м</p>
+                <p className='movie__duration'>{movieLength}</p>
             </div>
         </li>
     );

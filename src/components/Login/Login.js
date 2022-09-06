@@ -1,38 +1,102 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import './Login.css';
 import { AuthLogo } from '../AuthLogo/AuthLogo';
 import { AuthTitle } from '../AuthTitle/AuthTitle';
 import { AuthBox } from '../AuthBox/AuthBox';
 import { AuthForm } from '../AuthForm/AuthForm';
 import { AuthInput } from '../AuthInput/AuthInput';
-import { AuthBtn } from '../AuthBtn/AuthBtn';
 import { AuthCaption } from '../AuthCaption/AuthCaption';
+import classNames from 'classnames';
 
-export const Login = () => {
+export const Login = ({ resultMessage, isAllowed, onLogin }) => {
+    const type = 'signin';
+
+    const [messageError, setMessageError] = useState({
+        email: '',
+        password: '',
+    });
+    const [userData, setUserData] = useState({
+        email: '',
+        password: '',
+    });
+
+    const [isValid, setIsValid] = useState(false);
+
+    const handleChange = (evt) => {
+        const { name, value } = evt.target;
+        setUserData((prev) => ({...prev, [name]: value}));
+        setMessageError((prev) => ({
+            ...prev,
+            [name]: evt.target.validationMessage,
+        }))
+    };
+
+    const login = (e) => {
+        if (type === 'signin' && (!userData.password || !userData.email)) {
+            return;
+        } else {
+            return onLogin(userData);
+        }
+    };
+    
+    useEffect(() => {
+        if (type === 'signin') {
+            if (messageError.email || messageError.password) {
+                return setIsValid(false);
+            } else if (!userData.password || !userData.email) {
+                return setIsValid(false);
+            }
+        }
+        setIsValid(true);
+    }, [messageError, userData, type]);
+
+    const classSaveButton = classNames(`button`, {
+        button_disabled: !isValid,
+        'button_disabled button__span': !isAllowed,
+    });
+
     return (
         <section className='login'>
             <AuthLogo />
             <AuthTitle titleText="Рады видеть!" />
             <AuthBox>
-                <AuthForm>
+                <AuthForm type={type} name='signin' isAllowed={isAllowed} onSubmit={login}>
                     <AuthInput 
                         lableText='E-mail' 
                         type='email'
-                        required='required'
+                        name='email'
+                        required
+                        onChange={handleChange}
+                        value={userData.email}
+                        messageError={messageError.email}
+                        pattern='^[^ ]+@[^ ]+\.[a-z]{2,3}$'
+        
                     />
                     <AuthInput 
                         lableText='Password' 
                         type='password'
-                        required='required'
+                        name='password'
                         minLength={8}
+                        required
+                        value={userData.password}
+                        onChange={handleChange}
+                        messageError={messageError.password}
                     />
+                    {!isAllowed && <p className='form__error'>{ resultMessage }</p>}
+                    <button 
+                        type='button'
+                        className={classSaveButton}
+                        onClick={login}
+                        disabled={!isValid}
+                        form={type}
+                    >Войти</button>
                 </AuthForm>
             </AuthBox>
-            <AuthBtn btnText='Войти' />
+            
             <AuthCaption 
                 text='Ещё не зарегистрированы?'
                 linkText='Регистрация'
-                linkTo='/signin' 
+                linkTo='/signup' 
             />
         </section>
     );

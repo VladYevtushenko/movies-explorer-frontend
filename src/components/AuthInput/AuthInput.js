@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React from 'react';
 import './AuthInput.css'
 
 export const AuthInput = ({
@@ -8,28 +8,29 @@ export const AuthInput = ({
     minLength,
     maxLength,
     required,
+    pattern,
+    onChange,
+    messageError,
+    userData,
 }) => {
-
-    const [errMessage, setErrMessage] = useState();
-    const handleInput = (evt) => {
-        setErrMessage(evt.target.validationMessage);
-    };
 
     return (
         <>
             <label className='input input__label'>
                 {lableText}
                 <input 
-                    className='input input__input'
+                    className='input__item'
                     type={type}
                     name={name}
                     minLength={minLength}
                     maxLength={maxLength}
                     required={required}
-                    onChange={handleInput}
+                    onChange={onChange}
+                    value={userData}
+                    pattern={pattern}
                 />
                 <span className='input__error'>
-                    {errMessage}
+                    {messageError}
                 </span>
             </label>
             

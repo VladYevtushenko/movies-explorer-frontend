@@ -13,7 +13,7 @@
     color: #8B8B8B;
 }
 
-.input__input {
+.input__item {
     font-style: normal;
     font-weight: 500;
     font-size: 14px;
@@ -27,7 +27,7 @@
     margin-top: 5px;
 }
 
-.input__input:focus {
+.input__item:focus {
     outline: none;
     border-bottom: 1px solid #4285F4;
 }
